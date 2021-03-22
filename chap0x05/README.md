@@ -8,15 +8,15 @@
 
 [实验过程](#02)
 
-​	[Part 0 安装和配置Java SDK](#020)
+​			[Part 0 安装和配置Java SDK](#020)
 
-​	[Part 1 安装Android Studio](#021)
+​			[Part 1 安装Android Studio](#021)
 
-​	[Part 2 下载安装Android SDK](#022)
+​			[Part 2 下载安装Android SDK](#022)
 
-​	[Part 3 配置Android模拟器运行环境](#023)
+​			[Part 3 配置Android模拟器运行环境](#023)
 
-​	[Part 4 配置Gradle编译环境](#024)
+​			[Part 4 配置Gradle编译环境](#024)
 
 [问题和解决](#03)
 
@@ -67,7 +67,7 @@ Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File
 
 安装成功。
 
-![AndroidSDKVersion](/img/AndroidSDKVersion.png)
+![AndroidSDKVersion](img/AndroidSDKVersion.png)
 
 
 
