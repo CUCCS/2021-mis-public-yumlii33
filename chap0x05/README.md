@@ -2,46 +2,46 @@
 
 ## 目录
 
-<span id= "00">实验要求</span>
+[实验要求](#00)
 
-<span id= "01">实验环境</span>
+[实验环境](#01)
 
-<span id= "02">实验过程</span>
+[实验过程](#02)
 
-​	<span id= "020">Part 0 安装和配置Java SDK</span>
+​	[Part 0 安装和配置Java SDK](#020)
 
-​	<span id= "021">Part 1 安装Android Studio</span>
+​	[Part 1 安装Android Studio](#021)
 
-​	<span id= "022">Part 2 下载安装Android SDK</span>
+​	[Part 2 下载安装Android SDK](#022)
 
-​	<span id= "023">Part 3 配置Android模拟器运行环境</span>
+​	[Part 3 配置Android模拟器运行环境](#023)
 
-​	<span id= "024">Part 4 配置Gradle编译环境</span>
+​	[Part 4 配置Gradle编译环境](#024)
 
-<span id= "03">问题和解决</span>
+[问题和解决](#03)
 
-<span id= "04">参考资料</span>
+[参考资料](#04)
 
-## [实验要求](#00)
+## <span id= "00">实验要求</span>
 
 * Android 模拟器环境搭建
 
-## [实验环境](#01)
+## <span id= "01">实验环境</span>
 
 * windows 10 
 * Android Studio 4.1.3
 
-## [实验过程](#02)
+## <span id= "02">实验过程</span>
 
-### [Part 0](020) 安装和配置Java SDK
+### <span id= "020">Part 0</span> 安装和配置Java SDK
 
 Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File -> Project Structure -> SDK Location 可以查看到 Android Studio 在编译当前项目时使用的 JDK 目录。
 
-![image-20210322172914398](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322172914398.png)
+![jdkLocation](img/jdkLocation.png)
 
 
 
-### [Part 1](021) 安装Android Studio
+### <span id= "021">Part 1</span> 安装Android Studio
 
 通过官方网站下载[Android Studio](https://developer.android.com/studio/) 最新版本并根据提示安装，这里安装的是`Android Studio 4.1.3`。
 
@@ -49,33 +49,33 @@ Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File
 
 安装成功：
 
-![image-20210322110804821](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322110804821.png)
+![installSuccess](img/installSuccess.png)
 
 
 
-### [Part 2](022) 下载安装Android SDK
+### <span id= "022">Part 2</span> 下载安装Android SDK
 
 在启动 Android Studio 之后可以通过启动界面的菜单选项 Configure -> SDK Manager 启动 SDK Manager 。
 
-![image-20210322111906472](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322111906472.png)
+![AndroidSDK](img/AndroidSDK.png)
 
 可以看到，已经自动安装了`Android 11.0`。
 
 在安装`Android 10.0`，为本人手机目前的`Android`版本。
 
-<img src="C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322113237259.png" alt="image-20210322113237259" style="zoom: 25%;" />
+<img src="img/myPhoneAndroidVersion.png" alt="myPhoneAndroidVersion" style="zoom: 25%;" />
 
 安装成功。
 
-![image-20210322112836362](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322112836362.png)
+![AndroidSDKVersion](/img/AndroidSDKVersion.png)
 
 
 
-### [Part 3](023) 配置Android模拟器运行环境
+### <span id= "023">Part 3</span> 配置Android模拟器运行环境
 
 安装 Intel x86 Emulator Accelerator (HAXM installer)。
 
-![image-20210322114211243](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322114211243.png)
+![HAXMInstaller](img/HAXMInstaller.png)
 
 可以看到，新版本已经自动安装成功**Android Emulator** 组件。
 
@@ -85,37 +85,37 @@ Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File
 
   * AVD Manager -> Create Virtual Decices
 
-    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162138722.png)
+    ![createVirtualDecices](img/createVirtualDecices.png)
 
   * 选择硬件型号（Phone + Pixel 4XL）
 
-    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162319905.png)
+    ![selectHardware](img/selectHardware.png)
 
   * 选择Android版本（API Level 29 + ABI x86 + Android 10.0）
 
-    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162909444.png)
+    ![systemImage](img/systemImage.png)
 
   * 验证配置是否正确
 
-    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322163319850.png)
+    ![verifyAVDConfiguration](img/verifyAVDConfiguration.png)
 
   * 创建成功
 
-    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322163347571.png)
+    ![newAVD](img/newAVD.png)
 
 * 直接点击Action的第一个箭头在模拟器中展示
 
-  ![image-20210322164755308](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322164755308.png)
+  ![AVDinSimulator](img/AVDinSimulator.png)
 
 * 可以使用在不同的AVD上运行自己写的功能代码
 
-  ![image-20210322165405944](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322165405944.png)
+  ![appRunonAVD](D:\Project-mis\2021-mis-public-yumlii33\chap0x05\img\appRunonAVD.png)
 
-### [Part 4](024) 配置Gradle编译环境
+### <span id="024">Part 4</span> 配置Gradle编译环境
 
 通过`File->Project Structure->Project`查看`Gradle`插件版本，已经安装对应版本的Gradle插件和Gradle。
 
-![image-20210322171937893](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322171937893.png)
+![gradleVersion](img/gradleVersion.png)
 
 **Gradle和Gradle插件：**
 
@@ -125,15 +125,15 @@ Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File
 
 * Gradle 和 Android 插件版本对应关系：
 
-  ![image-20210322174457138](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322174457138.png)
+  ![gradleAndGradlePlugin](img/gradleAndGradlePlugin.png)
 
 
 
-## [问题和解决](#03)
+## <span id= "03">问题和解决</span>
 
 - [x] <span id= "jump1">Q1</span>：初次安装`Android Studio`，启动后报错：`Unable to access Android SDK add-on list`。
 
-  ![image-20210322102536617](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322102536617.png)
+  ![error1](D:\Project-mis\2021-mis-public-yumlii33\chap0x05\img\error1.png)
 
   原因：`Android Studio`启动后会在默认路径下检测是否有`Android SDK`，如果没有的话就会报上述错误。
 
@@ -146,7 +146,7 @@ Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File
     
 
 
-## [参考资料](04)
+## <span id= "04">参考资料</span>
 
 * [移动网络安全第五章实验指南](https://c4pr1c3.github.io/cuc-mis/chap0x05/exp.html)
 * [Android Studio报错unable to access android sdk add-on list解决方案](https://blog.csdn.net/u010358168/article/details/81535307)
