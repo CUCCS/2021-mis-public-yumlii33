@@ -15,9 +15,11 @@
 
 Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1 为例，通过菜单 File -> Project Structure -> SDK Location 可以查看到 Android Studio 在编译当前项目时使用的 JDK 目录。
 
+
+
 ### Part 1 安装Android Studio
 
-通过官方网站下载[Android Studio](https://developer.android.com/studio/) 最新版本并根据提示安装。安装 Android Studio 的过程中可能会提示联网下载更新 Android SDK。
+通过官方网站下载[Android Studio](https://developer.android.com/studio/) 最新版本并根据提示安装，这里安装的是`Android Studio 4.1.3`。
 
 初次启动提示找不到`Android SDK`，采用**跳过检测**的方法解决。（解决过程记录在[问题和解决 Q1](#jump1)）
 
@@ -25,11 +27,51 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
 ![image-20210322110804821](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322110804821.png)
 
+
+
 ### Part 2 下载安装Android SDK
+
+在启动 Android Studio 之后可以通过启动界面的菜单选项 Configure -> SDK Manager 启动 SDK Manager 。
+
+![image-20210322111906472](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322111906472.png)
+
+可以看到，已经自动安装了`Android 11.0`。
+
+在安装`Android 10.0`，为本人手机目前的`Android`版本。
+
+<img src="C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322113237259.png" alt="image-20210322113237259" style="zoom: 25%;" />
+
+安装成功。
+
+![image-20210322112836362](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322112836362.png)
 
 
 
 ### Part 3 配置Android模拟器运行环境
+
+安装 Intel x86 Emulator Accelerator (HAXM installer)。
+
+![image-20210322114211243](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322114211243.png)
+
+可以看到，新版本已经自动安装成功**Android Emulator** 组件。
+
+参阅[官方文档](https://developer.android.com/studio/run/emulator)在 Android 模拟器上运行应用
+
+* 在 Android Studio 中创建一个 Android 虚拟设备 (AVD)
+
+  ![image-20210322115453079](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322115453079.png)
+
+  ![image-20210322115534708](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322115534708.png)
+
+  ![image-20210322120455438](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322120455438.png)
+
+  ![image-20210322120608193](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322120608193.png)
+
+* 在工具栏中，从目标设备下拉菜单中选择要用来运行应用的 AVD。
+
+* 点击 **Run** 图标 ![img](https://developer.android.com/studio/images/buttons/toolbar-run.png)。
+
+
 
 ### Part 4 配置Gradle编译环境
 
@@ -57,4 +99,5 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
 * [移动网络安全第五章实验指南](https://c4pr1c3.github.io/cuc-mis/chap0x05/exp.html)
 * [Android Studio报错unable to access android sdk add-on list解决方案](https://blog.csdn.net/u010358168/article/details/81535307)
+* [在 Android 模拟器上运行应用  |  Android 开发者  |  Android Developers](https://developer.android.com/studio/run/emulator)
 
