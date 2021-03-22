@@ -59,19 +59,33 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
 * 在 Android Studio 中创建一个 Android 虚拟设备 (AVD)
 
-  ![image-20210322115453079](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322115453079.png)
+  * AVD Manager -> Create Virtual Decices
 
-  ![image-20210322115534708](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322115534708.png)
+    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162138722.png)
 
-  ![image-20210322120455438](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322120455438.png)
+  * 选择硬件型号（Phone + Pixel 4XL）
 
-  ![image-20210322120608193](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322120608193.png)
+    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162319905.png)
 
-* 在工具栏中，从目标设备下拉菜单中选择要用来运行应用的 AVD。
+  * 选择Android版本（API Level 29 + ABI x86 + Android 10.0）
 
-* 点击 **Run** 图标 ![img](https://developer.android.com/studio/images/buttons/toolbar-run.png)。
+    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322162909444.png)
 
+  * 验证配置是否正确
 
+    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322163319850.png)
+
+  * 创建成功
+
+    ![](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322163347571.png)
+
+* 直接点击Action的第一个箭头在模拟器中展示
+
+  ![image-20210322164755308](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322164755308.png)
+
+* 可以使用在不同的AVD上运行自己写的功能代码
+
+  ![image-20210322165405944](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322165405944.png)
 
 ### Part 4 配置Gradle编译环境
 
