@@ -1,23 +1,47 @@
 # H5 Android 模拟器环境搭建笔记
 
-## 实验要求
+## 目录
+
+<span id= "00">实验要求</span>
+
+<span id= "01">实验环境</span>
+
+<span id= "02">实验过程</span>
+
+​	<span id= "020">Part 0 安装和配置Java SDK</span>
+
+​	<span id= "021">Part 1 安装Android Studio</span>
+
+​	<span id= "022">Part 2 下载安装Android SDK</span>
+
+​	<span id= "023">Part 3 配置Android模拟器运行环境</span>
+
+​	<span id= "024">Part 4 配置Gradle编译环境</span>
+
+<span id= "03">问题和解决</span>
+
+<span id= "04">参考资料</span>
+
+## [实验要求](#00)
 
 * Android 模拟器环境搭建
 
-## 实验环境
+## [实验环境](#01)
 
 * windows 10 
 * Android Studio 4.1.3
 
-## 实验过程
+## [实验过程](#02)
 
-### Part 0 安装和配置Java SDK
+### [Part 0](020) 安装和配置Java SDK
 
-Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1 为例，通过菜单 File -> Project Structure -> SDK Location 可以查看到 Android Studio 在编译当前项目时使用的 JDK 目录。
+Android Studio 安装后已经内置了 Java 运行时环境，通过菜单 File -> Project Structure -> SDK Location 可以查看到 Android Studio 在编译当前项目时使用的 JDK 目录。
+
+![image-20210322172914398](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322172914398.png)
 
 
 
-### Part 1 安装Android Studio
+### [Part 1](021) 安装Android Studio
 
 通过官方网站下载[Android Studio](https://developer.android.com/studio/) 最新版本并根据提示安装，这里安装的是`Android Studio 4.1.3`。
 
@@ -29,7 +53,7 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
 
 
-### Part 2 下载安装Android SDK
+### [Part 2](022) 下载安装Android SDK
 
 在启动 Android Studio 之后可以通过启动界面的菜单选项 Configure -> SDK Manager 启动 SDK Manager 。
 
@@ -47,7 +71,7 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
 
 
-### Part 3 配置Android模拟器运行环境
+### [Part 3](023) 配置Android模拟器运行环境
 
 安装 Intel x86 Emulator Accelerator (HAXM installer)。
 
@@ -87,13 +111,25 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
   ![image-20210322165405944](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322165405944.png)
 
-### Part 4 配置Gradle编译环境
+### [Part 4](024) 配置Gradle编译环境
+
+通过`File->Project Structure->Project`查看`Gradle`插件版本，已经安装对应版本的Gradle插件和Gradle。
+
+![image-20210322171937893](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322171937893.png)
+
+**Gradle和Gradle插件：**
+
+* Android Studio的编译系统使用的是Gradle自动执行和管理构建流程，Android Plugin for Gradle增加了编译Android APP所需要的特性。 
+
+* Gradle 和 Android 插件独立于 `Android Studio` 运行。所以更新`Android Studio`需要单独更新Gradle和Android插件。
+
+* Gradle 和 Android 插件版本对应关系：
+
+  ![image-20210322174457138](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210322174457138.png)
 
 
 
-## 实验总结
-
-## 问题和解决
+## [问题和解决](#03)
 
 - [x] <span id= "jump1">Q1</span>：初次安装`Android Studio`，启动后报错：`Unable to access Android SDK add-on list`。
 
@@ -107,11 +143,14 @@ Android Studio 安装后已经内置了 Java 运行时环境，以 Android 3.2.1
 
   * 在尾行添加`disable.android.first.run=true`，表示初次启动不检测SDK
 
-- [ ] Q2：
+    
 
-## 参考资料
+
+## [参考资料](04)
 
 * [移动网络安全第五章实验指南](https://c4pr1c3.github.io/cuc-mis/chap0x05/exp.html)
 * [Android Studio报错unable to access android sdk add-on list解决方案](https://blog.csdn.net/u010358168/article/details/81535307)
 * [在 Android 模拟器上运行应用  |  Android 开发者  |  Android Developers](https://developer.android.com/studio/run/emulator)
+* [配置构建  |  Android 开发者  |  Android Developers](https://developer.android.com/studio/build)
+* [Android Gradle 插件版本说明](https://developer.android.com/studio/releases/gradle-plugin)
 
