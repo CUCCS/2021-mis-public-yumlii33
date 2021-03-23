@@ -22,6 +22,11 @@
 ## <span id= "00">实验要求</span>
 
 * `Android` 模拟器环境搭建
+  - [x] 安装和配置` Java SDK`
+  - [x] 安装`Android Studio`
+  - [x] 下载安装 `Android SDK`
+  - [x] 配置` Android` 模拟器运行环境
+  - [x] 配置 `Gradle` 编译环境
 
 ## <span id= "01">实验环境</span>
 
@@ -32,7 +37,7 @@
 
 ### <span id= "020">Part 0</span> 安装和配置Java SDK
 
-`Android Studio` 安装后已经内置了 `Java` 运行时环境，通过菜单 `File` -> `Project Structure` -> `SDK Location` 可以查看到 `Android Studio` 在编译当前项目时使用的 `JDK` 目录。
+`Android Studio` 安装后已经内置了 `Java` 运行时环境，通过菜单 `File` -> `Project Structure` -> `SDK Location` 可以查看到 `Android Studio` 在编译当前项目时使用的 `JDK` 目录。（安装后查看的截图）
 
 ![jdkLocation](img/jdkLocation.png)
 
