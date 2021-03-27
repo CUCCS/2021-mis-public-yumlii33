@@ -93,8 +93,13 @@ https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-combined-s
 ## <span id = "04">问题和解决</span>
 
 - [ ] Q0：在kali里面下载时，显示无法找到什么什么，但是能够ping通。上网搜博客，修改/etc/resolv.conf之后，不行，修改回来后，连ping都ping不通了。
+
+  A0：修改文件/etc/network/interfaces，设置dhcp，然后重启网络，sudo /etc/init.d/networking restart，就可以ping通了，并且可以访问之前不能下载的链接。
+
 - [ ] Q1：
+
 - [ ] Q2：
+
 - [ ] Q3：
 
 ## <span id = "5">课后作业</span>
