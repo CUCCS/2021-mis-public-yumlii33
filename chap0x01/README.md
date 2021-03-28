@@ -52,7 +52,9 @@
 
 * 配置`ssh`远程桌面连接。
 
-  ![配置远程桌面](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\配置远程桌面.png)
+  （参考上学期的实验报告，上学期实验报告有小错误，已经修改。）
+
+  ![配置远程桌面](img/配置远程桌面.png)
 
 * 设置虚拟机和宿主机的文件共享，实现宿主机和虚拟机的双向文件共享。
 
@@ -64,15 +66,19 @@
 
   下载：`get [服务器上文件存储的位置] ([本地要存储的位置])`
 
-  ![sftp文件共享](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\sftp文件共享.png)
+  ![sftp文件共享](img/sftp文件共享.png)
 
 #### 下载安装`OpenWrt`
 
-* 
+* 在windows上执行老师提供的[bash脚本（稍微修改了一下）](code/setup.sh)【详细说明见[问题和解决——Q1](#041)】
 
-https://downloads.openwrt.org/releases/19.07.2/targets/x86/64/openwrt-19.07.2-x86-64-combined-ext4.img.gz
+  执行成功（有一个报错是因为之前执行过一次，所以vdi文件已经创建好了）
 
-https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-combined-squashfs.img.gz
+  ![脚本执行成功](img/脚本执行成功.png)
+
+  列表中出现自动创建好的虚拟机
+
+  ![openwrt安装成功](img/openwrt安装成功.png)
 
 * 
 
@@ -96,7 +102,24 @@ https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-combined-s
 
   A0：修改文件/etc/network/interfaces，设置dhcp，然后重启网络，sudo /etc/init.d/networking restart，就可以ping通了，并且可以访问之前不能下载的链接。
 
-- [ ] Q1：
+- [ ] <span id="041">Q1</span>：运行脚本安装openwrt时，修改脚本以及windows的配置，使得安装脚本在windows上成功运行。
+
+  * 运行环境：`Git Bash`可以提供bash脚本的运行环境，但是会有一些命令的缺失。
+
+  * git bash没有wget命令：[下载wget安装包](https://eternallybored.org/misc/wget/)，并将wget.exe拷贝到C:\Program Files\Git\mingw64\bin\下面。
+
+  * 找不到VBoxManage命令：在电脑上找到VBoxManage.exe，然后将其路径加到环境变量里。
+
+    ![添加VBoxManage环境变量](img/添加VBoxManage环境变量.png)
+
+    
+
+  * 创建虚拟机失败：删掉脚本里创建虚拟机是的分组选项，因为自己的电脑没有设置分组。
+  ![没找到分组报错](img/没找到分组报错.png)
+
+  解决完成上述问题后，setup-vm.sh运行成功。
+
+  
 
 - [ ] Q2：
 
@@ -107,6 +130,6 @@ https://downloads.openwrt.org/snapshots/targets/x86/64/openwrt-x86-64-combined-s
 ## <span id = "06">参考资料</span>
 
 * [[OpenWrt Wiki] OpenWrt on VirtualBox HowTo](https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm)
-* [reference](link)
+* [windows git bash wget: command not found](https://blog.csdn.net/eddy23513/article/details/106621754/)
 * [reference](link)
 * [reference](link)
