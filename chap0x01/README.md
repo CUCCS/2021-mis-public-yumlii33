@@ -1,4 +1,4 @@
-# H1 OpenWrt 虚拟机搭建
+H1 OpenWrt 虚拟机搭建
 
 **目录**
 
@@ -7,8 +7,8 @@
 * [实验要求](#01)
 * [实验过程](#02)
   * [Part 0 复习VirtualBox的配置和使用](020)
-  * [Part 1 下载安装`OpenWrt`](#021)
-  * [022](#022)
+  * [Part 1 下载安装OpenWrt](#021)
+  * [Part 2 配置无线网卡使其正常工作](#022)
   * [023](#023)
   * [024](#024)
   * [025](#025)
@@ -66,7 +66,7 @@
 
   ![sftp文件共享](img/sftp文件共享.png)
 
-### <span id = "021">Part 1 </span>下载安装`OpenWrt`
+### <span id = "021">Part 1 </span>下载安装OpenWrt
 
 * 在windows上执行老师提供的[bash脚本（稍微修改了一下）](code/setup.sh)【详细说明见[问题和解决——Q1](#041)】
 
@@ -119,32 +119,23 @@
   opkg install luci
   ```
 
-  安装成功的后访问：![image-20210328151340756](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210328151340756.png)
-
+  安装成功的后访问：
+  ![可以访问](img\可以访问.PNG)
   
 
-### <span id = "022">Part 2</span> 开启AP功能
+### <span id = "022">Part 2</span> 配置无线网卡使其正常工作
 
-* 插上无线网卡：
+* 插上无线网卡,检查能否识别设备：
 
-  在显示窗口的右下角USB设备中勾选上刚插上的无线网卡：
+  在显示窗口的右下角USB设备看到刚插入的设备，勾选上刚插上的无线网卡：
 
   ![插上无线网卡](img/插上无线网卡.png)
 
-* 查看是否能识别无线网卡：
-
-  ```
-  # 查看物理网卡的硬件和软件特性支持情况
-  iw phy
-  iw list
-  ```
-
-  ![image-20210328163811641](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210328163811641.png)
 
 * 在OpenWrt中安装lsusb ：
 
   ```
-  # 每次重启 OpenWRT 之后，安装软件包或使用搜索命令之前均需要执行一次 opkg update
+  # 每次重启 OpenWrt 之后，安装软件包或使用搜索命令之前均需要执行一次 opkg update
   opkg update && opkg install usbutils
   ```
 
@@ -158,15 +149,52 @@
   lsusb -t
   ```
 
-  没有安装好：
+  发现能识别到无线网卡设备，但是没有加载驱动:
 
-  ![查看驱动是否安装好](img/查看驱动是否安装好.png)
+  ![lsusb查看发现没有驱动](img/lsusb查看发现没有驱动.PNG)
+  
+  执行命令`ifconfig -a`或`ip link`也无法看到有效的无线网络（好像忘记截图了）。
+  
+* 安装对应驱动
 
+  通过`lsusb`的执行结果可知：无线网卡的芯片名称为`RTL8811AU`。
 
+  通过 `opkg find` 命令可以快速查找可能包含指定芯片名称的驱动程序包：
 
+  发现只有`RTL8812au`型号的驱动，（由于在搜资料的时候，有博客说可以兼容，所以下载`RTL8812AU`型号的芯片
 
+  ![下载kmod-rtl0012au-ct](img/下载kmod-rtl0012au-ct.png)
 
+* 检查驱动是否安装成功
 
+  再次执行`lsusb -t`,发现成功加载驱动：
+
+  ![识别了驱动rtl8812au](img/识别了驱动rtl8812au.png)
+
+  再次执行`ip link`，可以验证系统已经可以识别此块无线网卡：
+
+  ![可以识别无线网卡网络](img/可以识别无线网卡网络.png)
+
+* `iw dev`执行结果：
+
+  ```
+  root@OpenWrt:~# iw dev
+  phy#0
+          Interface wlan0
+                  ifindex 5
+                  wdev 0x1
+                  addr 40:a5:ef:de:ec:cd
+                  type managed
+                  txpower 12.00 dBm
+  ```
+
+* `iw phy`执行结果：[`iw phy`](code/iw-phy-result.txt)
+
+  ![支持AP模式](img/支持AP模式.png)
+
+  可以看到此无线网卡支持AP模式
+
+* `lsusb -v`执行结果：[`lsusb -v`](code/lsusb-v-result.txt)
 
 ### <span id = "023">Part 3</span>
 
@@ -180,11 +208,11 @@
 
 ## <span id = "04">问题和解决</span>
 
-- [ ] **Q0：在kali里面下载时，显示无法找到什么什么，但是能够ping通。上网搜博客，修改/etc/resolv.conf之后，不行，修改回来后，连ping都ping不通了。**
+- [x] **Q0：在kali里面下载时，显示无法找到什么什么，但是能够ping通。上网搜博客，修改/etc/resolv.conf之后，不行，修改回来后，连ping都ping不通了。**
 
   A0：修改文件/etc/network/interfaces，设置dhcp，然后重启网络，sudo /etc/init.d/networking restart，就可以ping通了，并且可以访问之前不能下载的链接。
 
-- [ ] **<span id="041">Q1</span>：运行脚本安装openwrt时，修改脚本以及windows的配置，使得安装脚本在windows上成功运行。**
+- [x] **<span id="041">Q1</span>：运行脚本安装openwrt时，修改脚本以及windows的配置，使得安装脚本在windows上成功运行。**
 
   * 运行环境：`Git Bash`可以提供bash脚本的运行环境，但是会有一些命令的缺失。
 
@@ -208,9 +236,11 @@
 
   解决完成上述问题后，setup-vm.sh运行成功，虚拟机可以正常运行。  
 
-- [ ] Q2：
+- [x] **Q2：执行`opkg install xx`卡住，一直不成功，也无返回结果；执行`opkg find`也无返回结果。**
 
-- [ ] **Q3：没有USB3.0选项。**
+  A2：在要安装驱动时，多次执行`opkg find`搜索对应驱动无果，想到源码编译，但是`opkg install git`也一直不成功，怀疑是脚本安装openwrt在我的机器上出错了。但是后来再次尝试**重启**后，`opkg`命令都能正常工作（除了有一点慢），不太清楚具体是什么原因导致之前一直失败。
+
+- [x] **Q3：没有USB3.0选项。**
 
   ![没有usb3.0选项](img/没有usb3.0选项.png)
 
