@@ -1,4 +1,4 @@
-H1 OpenWrt 虚拟机搭建
+# H1 OpenWrt 虚拟机搭建
 
 **目录**
 
@@ -44,27 +44,41 @@ H1 OpenWrt 虚拟机搭建
 
 ### <span id = "020">Part 0</span> 复习VirtualBox的配置和使用
 
-* 重新安装了Kali2020，网卡选择：`NAT`+`Host-Only`。
+* 虚拟机镜像列表
 
-* 将虚拟硬盘更改为`多重加载`。
-
-* 配置`ssh`远程桌面连接。
-
-  （参考上学期的实验报告，上学期实验报告有小错误，已经修改。）
-
-  ![配置远程桌面](img/配置远程桌面.png)
+  ![虚拟镜像列表](img/虚拟镜像列表.png)
 
 * 设置虚拟机和宿主机的文件共享，实现宿主机和虚拟机的双向文件共享。
 
-  使用`sftp`协议实现双向文件共享。
+  * 设置共享文件夹
 
-  连接远程服务器（这里使用windows主机连接kali虚拟机）：`sftp user@ip`
+  * 使用`sftp`协议实现双向文件共享。
 
-  上传：`put [本地文件的地址] ([服务器上文件存储位置])`
+    连接远程服务器（这里使用windows主机连接kali虚拟机）：`sftp user@ip`
 
-  下载：`get [服务器上文件存储的位置] ([本地要存储的位置])`
+    上传：`put [本地文件的地址] ([服务器上文件存储位置])`
 
-  ![sftp文件共享](img/sftp文件共享.png)
+    下载：`get [服务器上文件存储的位置] ([本地要存储的位置])`
+
+    ![sftp文件共享](img/sftp文件共享.png)
+
+* 配置`ssh`远程桌面连接
+
+  参考上学期的实验报告配置：（上学期实验报告有小错误，已经修改）
+
+  ![配置远程桌面](img/配置远程桌面.png)
+
+* 虚拟机镜像备份和还原的方法
+
+  * 选择`生成快照`,完成备份，之后可以通过`恢复备份`回到之前备份时的状态。
+
+    ![快照备份方式](img/快照备份方式.png)
+
+  * 刚创建好一个虚拟硬盘时，将虚拟硬盘更改为`多重加载`模式，之后如果想要获得一个全新的虚拟机即可选择`从已有虚拟硬盘创建`，也算是一种实现备份和还原的方法。
+
+    
+
+* 熟悉虚拟机基本网络配置，了解不同联网模式的典型应用场景
 
 ### <span id = "021">Part 1 </span>下载安装OpenWrt
 
@@ -122,17 +136,20 @@ H1 OpenWrt 虚拟机搭建
   安装成功的后访问：
   ![可以访问](img\可以访问.PNG)
   
+* 此时还没有Wireless选项
+
+  ![image-20210329154242628](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210329154242628.png)
 
 ### <span id = "022">Part 2</span> 配置无线网卡使其正常工作
 
 * 插上无线网卡,检查能否识别设备：
 
-  在显示窗口的右下角USB设备看到刚插入的设备，勾选上刚插上的无线网卡：
+  在显示窗口的右下角USB设备看到刚插入的设备，即可以识别，勾选上刚插上的无线网卡：
 
   ![插上无线网卡](img/插上无线网卡.png)
 
 
-* 在OpenWrt中安装lsusb ：
+* 在OpenWrt中安装lsusb 用以查看无线网卡的信息：
 
   ```
   # 每次重启 OpenWrt 之后，安装软件包或使用搜索命令之前均需要执行一次 opkg update
@@ -153,15 +170,17 @@ H1 OpenWrt 虚拟机搭建
 
   ![lsusb查看发现没有驱动](img/lsusb查看发现没有驱动.PNG)
   
-  执行命令`ifconfig -a`或`ip link`也无法看到有效的无线网络（好像忘记截图了）。
+  执行命令`ifconfig -a`或`ip link`也无法看到有效的无线网络。
+  
+  ![iplink没有wlan](img/iplink没有wlan.png)
   
 * 安装对应驱动
 
   通过`lsusb`的执行结果可知：无线网卡的芯片名称为`RTL8811AU`。
 
-  通过 `opkg find` 命令可以快速查找可能包含指定芯片名称的驱动程序包：
+  通过 `opkg find kmod-* | grep rtl88` 命令可以快速查找可能包含指定芯片名称的驱动程序包：
 
-  发现只有`RTL8812au`型号的驱动，（由于在搜资料的时候，有博客说可以兼容，所以下载`RTL8812AU`型号的芯片
+  发现只有`RTL8812au`型号的驱动，（由于在搜资料的时候，有博客说可以兼容，所以下载`RTL8812AU`型号的驱动
 
   ![下载kmod-rtl0012au-ct](img/下载kmod-rtl0012au-ct.png)
 
@@ -174,6 +193,8 @@ H1 OpenWrt 虚拟机搭建
   再次执行`ip link`，可以验证系统已经可以识别此块无线网卡：
 
   ![可以识别无线网卡网络](img/可以识别无线网卡网络.png)
+
+* `lsusb -v`执行结果：[`lsusb -v`](code/lsusb-v-result.txt)
 
 * `iw dev`执行结果：
 
@@ -192,15 +213,58 @@ H1 OpenWrt 虚拟机搭建
 
   ![支持AP模式](img/支持AP模式.png)
 
-  可以看到此无线网卡支持AP模式
+  可以看到此款无线网卡支持AP模式。
 
-* `lsusb -v`执行结果：[`lsusb -v`](code/lsusb-v-result.txt)
+* `reboot`重启OpenWrt，网页上`NetWork`里多了一个`Wireless`选项：
 
-### <span id = "023">Part 3</span>
+  ![image-20210329165628876](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210329165628876.png)
 
-### <span id = "024">Part 4 </span>
+### <span id = "023">Part 3</span> 开启AP功能
+
+* 配置更安全的无线完全机制
+
+  默认情况下，OpenWrt 只支持 `WEP` 系列过时的无线安全机制。为了让 OpenWrt 支持 `WPA` 系列更安全的无线安全机制，还需要额外安装 2 个软件包：`wpa-supplicant` 和 `hostapd` 。
+
+  ```
+  # wpa-supplicant 提供 WPA 客户端认证
+  # hostapd 提供 AP 或 ad-hoc 模式的 WPA 认证
+  opkg install hostapd wpa-supplicant
+  ```
+
+  安装后重启。
+
+为了使用其他无线客户端可以正确发现新创建的无线网络，以下还有 3 点需要额外注意的特殊配置注意事项：
+
+* 无线网络的详细配置界面里的 `Interface Configuration` 表单里 `Network` 记得勾选 `wan` ；
+
+  ![选择wan](img/选择wan.png)
+
+* 虚拟机的 WAN 网卡对应的虚拟网络类型必须设置为 `NAT` 而不能使用 `NatNetwork` ，无线客户端连入无线网络后才可以正常上网。
+
+  ![网卡NAT](img/网卡NAT.png)
+
+* 不要使用 Auto 模式的信道选择和信号强度，[均手工指定](https://forum.archive.openwrt.org/viewtopic.php?id=37896) 才可以。
+
+  ![手工指定](img/手工指定.png)
+
+### <span id = "024">Part 4 </span>找到OpenWrt配置并截图
+
+* 重置和恢复AP到出厂默认设置状态
+* 设置AP的管理员用户名和密码
+* 设置SSID广播和非广播模式
+* 配置不同的加密方式
+* 设置AP管理密码
+* 配置无线路由器使用自定义的DNS解析服务器
+* 配置DHCP和禁用DHCP
+* 开启路由器/AP的日志记录功能（对指定事件记录）
+* 配置AP隔离(WLAN划分)功能
+* 设置MAC地址过滤规则（ACL地址过滤器）
+* 查看WPS功能的支持情况
+* 查看AP/无线路由器支持哪些工作模式
 
 ### <span id = "025">Part 5 </span>
+
+* 
 
 ### <span id = "026">Part 6 </span>
 
@@ -232,7 +296,7 @@ H1 OpenWrt 虚拟机搭建
 
     选择`192.168.56.x`的网段： 
 
-    ![网段选择](img\网段选择.png) 
+    ![网段选择](img/网段选择.png) 
 
   解决完成上述问题后，setup-vm.sh运行成功，虚拟机可以正常运行。  
 
@@ -244,11 +308,15 @@ H1 OpenWrt 虚拟机搭建
 
   ![没有usb3.0选项](img/没有usb3.0选项.png)
 
-  A3：因为是新安装的VirtualBox，没有USB3.0的选项，所以要安装`virtualbox extension pack`。在VirtalBox官网（https://www.virtualbox.org/wiki/Downloads）下载扩展包，双击安装包安装。
+  A3：因为是新安装的VirtualBox，没有USB3.0的选项，所以要安装`virtualbox extension pack`。在[VirtalBox官网](https://www.virtualbox.org/wiki/Downloads)下载扩展包，双击安装包安装。
 
   安装成功：
 
   ![安装VirtualBoxExtensionPack](img/安装VirtualBoxExtensionPack.png)
+  
+- [ ] Q4：`iwconfig not found`
+
+  A4：`opkg update && opkg install wireless-tools`
 
 ## <span id = "5">课后作业</span>
 
@@ -256,5 +324,5 @@ H1 OpenWrt 虚拟机搭建
 
 * [[OpenWrt Wiki] OpenWrt on VirtualBox HowTo](https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm)
 * [windows git bash wget: command not found](https://blog.csdn.net/eddy23513/article/details/106621754/)
-* [reference](link)
+* [OpenWrt Forum Archive](https://forum.archive.openwrt.org/viewtopic.php?id=37896)
 * [reference](link)
