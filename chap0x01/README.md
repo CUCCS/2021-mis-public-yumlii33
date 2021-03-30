@@ -9,8 +9,6 @@
   * [Part 2 配置无线网卡使其正常工作](#022)
   * [Part 3 开启AP功能](#023)
   * [Part 4 找到OpenWrt配置并截图](#024)
-  * [025](#025)
-  * [026](#026)
 * [实验总结](#03)
 * [问题和解决](#04)
 * [课后作业](#05)
@@ -27,7 +25,7 @@
 
 - 可以开启监听模式、AP 模式和数据帧注入功能的 USB comfast CF-915AC 2017年版
 
-  ![CF-915AC](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\cf-915ac.png)
+  ![CF-915AC](img/cf-915ac.png)
 
 - Virtualbox 6.1.18
 
@@ -48,7 +46,7 @@
 
 * 虚拟机镜像列表
 
-  ![虚拟镜像列表](img/虚拟镜像列表.png)
+  ![虚拟镜像列表](img/虚拟镜像列表.PNG)
 
 * 设置虚拟机和宿主机的文件共享，实现宿主机和虚拟机的双向文件共享。
 
@@ -84,7 +82,7 @@
 
 ### <span id = "021">Part 1 </span>下载安装OpenWrt
 
-* 在windows上执行老师提供的[bash脚本（稍微修改了一下）](code/setup.sh)【详细说明见[问题和解决——Q1](#041)】
+* 在windows上执行老师提供的[bash脚本（稍微修改了一下）](code/setup-vm.sh)【详细说明见[问题和解决——Q1](#041)】
 
   成功执行：（有一个报错是因为之前执行过一次，所以vdi文件已经创建好了）
 
@@ -96,7 +94,7 @@
 
 * 启动虚拟机：
 
-  ![启动OpenWrt终端控制台](img\启动OpenWrt终端控制台.png)
+  ![启动OpenWrt终端控制台](img/启动OpenWrt终端控制台.png)
 
 * 修改`/etc/config/network` 配置文件来设置远程管理专用网卡的 IP 地址：
 
@@ -122,7 +120,7 @@
 
 * 现在可以通过windows主机上访问`192.168.56.11`：
 
-  ![可以访问](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\可以访问.PNG)
+  ![可以访问](img/可以访问.PNG)
 
 * 安装`LuCi`软件包：
 
@@ -135,12 +133,12 @@
   opkg install luci
   ```
 
-  安装成功的后访问：
-  ![可以访问](img\可以访问.PNG)
+  安装成功的后访问(其实已经自带了luci)：
+  ![可以访问](img/可以访问.PNG)
   
 * 此时还没有Wireless选项
 
-  ![image-20210329154242628](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210329154242628.png)
+  ![此时还没有Wireless选项](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\此时还没有Wireless选项.png)
 
 ### <span id = "022">Part 2</span> 配置无线网卡使其正常工作
 
@@ -219,7 +217,7 @@
 
 * `reboot`重启OpenWrt，网页上`NetWork`里多了一个`Wireless`选项：
 
-  ![image-20210329165628876](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210329165628876.png)
+  ![多了wireless选项](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\多了wireless选项.png)
 
 ### <span id = "023">Part 3</span> 开启AP功能
 
@@ -291,7 +289,7 @@
 
   (在`network`->`wireless`->`Edit`->`Interface Configuration`->`Wireless Security`里进行设置)
 
-  ![image-20210330114130463](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\配置不同的加密方式.png)
+  ![配置不同的加密方式](img/配置不同的加密方式.png)
 
 * 设置AP管理密码
 
@@ -317,7 +315,7 @@
 
 * 设置MAC地址过滤规则（ACL地址过滤器）
 
-  ![设置MAC地址过滤规则（ACL地址过滤器）](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\设置MAC地址过滤规则（ACL地址过滤器）.png)
+  ![设置MAC地址过滤规则（ACL地址过滤器）](img/设置MAC地址过滤规则（ACL地址过滤器）.png)
 
 * 查看WPS功能的支持情况
 
@@ -392,4 +390,3 @@
 * [[OpenWrt Wiki] OpenWrt on VirtualBox HowTo](https://openwrt.org/docs/guide-user/virtualization/virtualbox-vm)
 * [windows git bash wget: command not found](https://blog.csdn.net/eddy23513/article/details/106621754/)
 * [OpenWrt Forum Archive](https://forum.archive.openwrt.org/viewtopic.php?id=37896)
-* [reference](link)
