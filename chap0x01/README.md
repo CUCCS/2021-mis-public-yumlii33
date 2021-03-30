@@ -138,7 +138,7 @@
   
 * 此时还没有Wireless选项
 
-  ![此时还没有Wireless选项](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\此时还没有Wireless选项.png)
+  ![此时还没有Wireless选项](img/此时还没有Wireless选项.png)
 
 ### <span id = "022">Part 2</span> 配置无线网卡使其正常工作
 
