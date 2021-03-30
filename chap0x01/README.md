@@ -109,7 +109,7 @@
 
 * 执行完成后列表中出现自动创建好的虚拟机：
 
-  ![openwrt安装成功](img/OpenWrt安装成功.png)
+  ![openwrt安装成功](img/openwrt安装成功.png)
 
 * 启动虚拟机：
 
@@ -236,7 +236,7 @@
 
 * `reboot`重启`OpenWrt`，网页上`NetWork`里多了一个`Wireless`选项：
 
-  ![多了wireless选项](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\多了wireless选项.png)
+  ![多了wireless选项](img/多了wireless选项.png)
 
 ### <span id = "023">Part 3</span> 开启`AP`功能
 
@@ -410,27 +410,25 @@
   
   * 网卡型号：[Atheros AR9271](https://c4pr1c3.github.io/cuc-mis/chap0x02/wn722n.html) 杂牌
   
-    
-  
     <img src="img/杂牌小白网卡.png" alt="杂牌小白网卡" style="zoom:33%;" />
   
     
   
   * 插入`OpenWrt`后无法识别，没有驱动
   
-    ![image-20210330221404392](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210330221404392.png)
+    ![没有驱动](img/zp-没有驱动.png)
   
   * 安装驱动
   
-    ![image-20210330221227605](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210330221227605.png)
+    ![安装驱动](img/zp-安装驱动.png)
   
   * 驱动安装成功
   
-    ![image-20210330221502808](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210330221502808.png)
+    ![驱动安装成功](img/zp-驱动安装成功.png)
   
-  * 访问`OpenWrt`网页，点击`Enable`，丝滑地成功了!![img](img/哭泣.png)
+  * 访问`OpenWrt`网页，点击`Enable`，丝滑地成功了!![哭泣](img/哭泣.png)
   
-    ![image-20210330222037802](D:\Project-mis\2021-mis-public-yumlii33\chap0x01\img\成功开启ap模式.png)
+    ![成功开启ap模式](img/成功开启ap模式.png)
 
 ## <span id = "06">参考资料</span>
 
