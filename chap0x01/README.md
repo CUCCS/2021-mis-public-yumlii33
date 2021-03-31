@@ -10,7 +10,9 @@
   * [Part 1 下载安装OpenWrt](#021)
   * [Part 2 配置无线网卡使其正常工作](#022)
   * [Part 3 开启AP功能](#023)
-  * [Part 4 找到OpenWrt配置并截图](#024)
+  * [Part 4 使用手机连接不同配置状态下的AP对比试验](#024)
+  * [Part 5 使用路由器/AP的配置导出备份功能，尝试解码导出配置文件](#025)
+  * [Part 6 找到OpenWrt配置并截图](#026)
 * [实验总结](#03)
 * [问题和解决](#04)
 * [课后作业](#05)
@@ -31,9 +33,15 @@
 
     <img src="img/cf-915ac.png" alt="CF-915AC" style="zoom:33%;" />
 
-  - 室友的网卡：杂牌网卡（非常好用）
+  - 室友的网卡：杂牌网卡（非常好用）（后续发现无法找到无线网络，手机无法连接）
 
-    <img src="img/杂牌小白网卡.png" alt="杂牌小白网卡" style="zoom:33%;" />          
+    <img src="img/杂牌小白网卡.png" alt="杂牌小白网卡" style="zoom:33%;" />
+    
+  - 最丝滑的网卡： [RT3572L 带双独立可拆卸天线](https://c4pr1c3.github.io/cuc-mis/chap0x02/rt3572l.html)
+
+    <img src="img/RT572L.png" alt="RT572L" style="zoom: 25%;" />
+
+    
 
 - Virtualbox 6.1.18
 
@@ -88,16 +96,13 @@
 
 * 熟悉虚拟机基本网络配置，了解不同联网模式的典型应用场景
 
-  ![虚拟机网络连接方式](img/虚拟机网络连接方式.png)
-
-  |      | 网络地址转换（NAT） | 桥接网卡 | 内部网络 | 仅主机（Host-Only）网络 | NAT网络 |
-  | ---- | ------------------- | -------- | -------- | ----------------------- | ------- |
-  |      |                     |          |          |                         |         |
-  |      |                     |          |          |                         |         |
-  |      |                     |          |          |                         |         |
-  |      |                     |          |          |                         |         |
+  * 联网模式选择：![虚拟机网络连接方式](img/虚拟机网络连接方式.png)
 
   
+  
+  * 联网模式概述（点击图片可以跳转到官网说明文档）：
+  
+    [![联网模式概述](img/联网模式概述.png)](https://www.virtualbox.org/manual/ch06.html)
 
 ### <span id = "021">Part 1 </span>下载安装`OpenWrt`
 
@@ -252,20 +257,19 @@
 
   安装后重启。
 
-为了使用其他无线客户端可以正确发现新创建的无线网络，以下还有 3 点需要额外注意的特殊配置注意事项：
+* 为了使用其他无线客户端可以正确发现新创建的无线网络，以下还有 3 点需要额外注意的特殊配置注意事项：
+  * 无线网络的详细配置界面里的 `Interface Configuration` 表单里 `Network` 记得勾选 `wan` ；
 
-* 无线网络的详细配置界面里的 `Interface Configuration` 表单里 `Network` 记得勾选 `wan` ；
+    ![选择wan](img/选择wan.png)
 
-  ![选择wan](img/选择wan.png)
+  * 虚拟机的 `WAN` 网卡对应的虚拟网络类型必须设置为 `NAT` 而不能使用 `NatNetwork` ，无线客户端连入无线网络后才可以正常上网。
 
-* 虚拟机的 `WAN` 网卡对应的虚拟网络类型必须设置为 `NAT` 而不能使用 `NatNetwork` ，无线客户端连入无线网络后才可以正常上网。
+    ![网卡NAT](img/网卡NAT.png)
 
-  ![网卡NAT](img/网卡NAT.png)
+  * 不要使用 `Auto` 模式的信道选择和信号强度，[均手工指定](https://forum.archive.OpenWrt.org/viewtopic.php?id=37896) 才可以。
 
-* 不要使用 `Auto` 模式的信道选择和信号强度，[均手工指定](https://forum.archive.OpenWrt.org/viewtopic.php?id=37896) 才可以。
+    ![手工指定](img/手工指定.png)
 
-  ![手工指定](img/手工指定.png)
-  
 * 修改后点击`Save&Apply`和`Enable`，开启`AP`：
 
   点击之前：
@@ -283,12 +287,28 @@
   在命令行使用`ip link`查看，网卡为`UP`状态。
 
   尝试了重登录，重启动`OpenWrt`，重插拔无线网卡，切换不同的usb接口，重启物理主机，重新配置新的`OpenWrt`，都失败，暂时不清楚为什么。
-  
-* 后续使用室友的无线网卡，丝滑成功：
+
+* 后续使用室友的白色杂牌无线网卡，丝滑成功：
 
   ![成功开启ap模式](img/成功开启ap模式.png)
 
-### <span id = "024">Part 4 </span>找到`OpenWrt`配置并截图
+* 上面的白色杂牌网卡，虽然可以开启`AP`模式并有信号，但是`小米手机`和`iPad`上都找不到该无线网络。
+
+* 使用上课时新换的新网卡，成功：
+
+  ![手机连接成功](img/手机连接成功.png)
+
+### <span id ="024">Part 4</span>  使用手机连接不同配置状态下的AP对比实验
+
+* 如果手机无法分配到IP地址但又想联网该如何解决？
+
+
+
+### <span id="025">Part 5</span>  使用路由器/AP的配置导出备份功能，尝试解码导出的配置文件
+
+
+
+### <span id = "026">Part 6 </span>找到`OpenWrt`配置并截图
 
 * 重置和恢复`AP`到出厂默认设置状态
 
@@ -406,7 +426,9 @@
   
 - [x] **Q5：`AP`功能开启失败**
 
-  A5：在尝试了一系列重启重装都不成功后，我借到了室友的网卡。
+  A5：网卡问题，试用了两个confast网卡，一个[Atheros AR9271](https://c4pr1c3.github.io/cuc-mis/chap0x02/wn722n.html) 杂牌网卡，一个
+  
+  ​	在尝试了一系列重启重装都不成功后，我借到了室友的网卡。
   
   * 网卡型号：[Atheros AR9271](https://c4pr1c3.github.io/cuc-mis/chap0x02/wn722n.html) 杂牌
   
@@ -429,9 +451,26 @@
   * 访问`OpenWrt`网页，点击`Enable`，丝滑地成功了!![哭泣](img/哭泣.png)
   
     ![成功开启ap模式](img/成功开启ap模式.png)
+  
+  但是无法在手机上搜到名为`OpenWrt`的无线网络，只尝试了重启，无法解决。由于第二天可以更换网卡，所以没再尝试其他解决方法。
+  
+  * 更换的新网卡： [RT3572L 带双独立可拆卸天线](https://c4pr1c3.github.io/cuc-mis/chap0x02/rt3572l.html)
+  
+    <img src="img/RT572L.png" alt="RT572L" style="zoom: 25%;" />
+  
+  * 可以识别，并且已经加载好了驱动：
+  
+    ![装载好了驱动](img/tx-装载好了驱动.png)
+  
+  * 访问网页，开启无线网络：
+  
+  * 
+  
+  
 
 ## <span id = "06">参考资料</span>
 
 * [[OpenWrt Wiki] OpenWrt on VirtualBox HowTo](https://OpenWrt.org/docs/guide-user/virtualization/virtualbox-vm)
 * [windows git bash wget: command not found](https://blog.csdn.net/eddy23513/article/details/106621754/)
 * [OpenWrt Forum Archive](https://forum.archive.OpenWrt.org/viewtopic.php?id=37896)
+* [Chapter 6. Virtual Networking](https://www.virtualbox.org/manual/ch06.html)
