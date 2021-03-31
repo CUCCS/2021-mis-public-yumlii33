@@ -108,6 +108,8 @@
 
   ![脚本执行成功](img/脚本执行成功.png)
 
+* 手动配置后，又对bash脚本进行了详细的注释：[setup-vm-detailed-comments.sh](code/setup-vm-detailed-comments.sh)
+
 * 执行完成后列表中出现自动创建好的虚拟机：
 
   ![openwrt安装成功](img/openwrt安装成功.png)
