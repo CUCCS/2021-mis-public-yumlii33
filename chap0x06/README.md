@@ -278,7 +278,7 @@ adb shell screenrecord /sdcard/demo.mp4
 
   输入`am start -n`命令直接唤起第二个界面的录屏：
 
-  <img src="img/跳过MainActivity进入DisplayMassageActivity页面-.gif" alt="跳过MainActivity进入DisplayMassageActivity页面" width=350 />
+  <img src="img/跳过MainActivity进入DisplayMassageActivity页面.gif" alt="跳过MainActivity进入DisplayMassageActivity页面" width=350 />
 
   ![代码执行](img/跳过MainActivity进入DisplayMassageActivity页面的代码执行.png)
 
@@ -369,7 +369,7 @@ adb shell screenrecord /sdcard/demo.mp4
 
   A1：因为没有`Run 'app'`，所以还没有更新。
 
-- [ ] Q2：模拟器自带的录屏功能不好用，模拟设备的screenrecord不能录到鼠标操作
+- [x] Q2：模拟器自带的录屏功能不好用，模拟设备的screenrecord不能录到鼠标操作
 
   A2：使用`win+G`调用windows自带的录屏功能，然后将得到的`MP4`文件转为`GIF`。在互联网上发现一个非常好用的转换网站：[tt0.top](https://tt0.top/)
 
