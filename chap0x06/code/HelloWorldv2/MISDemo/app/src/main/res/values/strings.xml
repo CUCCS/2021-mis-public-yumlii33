@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MISDemo</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Send</string>
+    <string name="pref_filename">pref_filename</string>
+    <string name="pref_usr_input_msg">pref_usr_input_msg</string>
+    <string name="register_ok">Register OK.</string>
+    <string name="register_failed">Register failed.</string>
+</resources>

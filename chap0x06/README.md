@@ -16,6 +16,9 @@
     * [1.1 代码编写](#311)
     * [1.2 回答问题](#312)
   * [`Part 2 Hello World v2`](#32)
+    * [2.0 代码编写](#320)
+    * [2.1 运行展示](#321)
+    * [2.2 回答问题](#322)
 * [实验总结](#4)
 * [问题和解决](#5)
 * [参考资料](#6)
@@ -239,15 +242,17 @@ adb shell screenrecord /sdcard/demo.mp4
   ![ditTextPersonName3](img/editText-id.png)
   
   ![textView3](img/textView3-id.png)
+  
+* [项目整体代码在此处](code/HelloWorldv1)。
 
 #### <span id ="312">1.2 回答问题</span>
 
 - [✅] 按照向导创建的工程在模拟器里运行成功的前提下，生成的APK文件在哪儿保存的？
 
   ```bash
-  \Users\[username]\AndroidStudioProjects\MISDemo\app\buid\outputs\apk\debug
+\Users\[username]\AndroidStudioProjects\MISDemo\app\buid\outputs\apk\debug
   ```
-
+  
   ![APK位置](img/APK位置.png)
 
 - [✅] 使用adb shell是否可以绕过MainActivity页面直接“唤起”第二个DisplayMessageActivity页面？是否可以在直接唤起的这个DisplayMessageActivity页面上显示自定义的一段文字，比如：你好移动互联网安全
@@ -286,7 +291,7 @@ adb shell screenrecord /sdcard/demo.mp4
 
   官方链接：[在硬件设备上运行应用  |  Android 开发者  |  Android Developers](https://developer.android.google.cn/studio/run/device)
 
-  设置开发环境和 Android 设备，以便通过 Android 调试桥 (ADB) 连接进行测试和调试。
+  使用`WiFi`或者`USB`数据线让电脑与`Android`客户端相连，然后在`Android Studio`中选择对应的设备，并在设备上运行程序。
 
 - [✅] 如何修改代码实现通过 `adb shell am start -a android.intent.action.VIEW -d http://sec.cuc.edu.cn/` 可以让我们的cuc.edu.cn.misdemo程序出现在“用于打开浏览器的应用程序选择列表”？
 
@@ -351,11 +356,84 @@ adb shell screenrecord /sdcard/demo.mp4
 
 ### <span id ="32">Part 2 `Hello World v2` </span>
 
-- 在v1基础之上，我们增加以下新功能来为后续的程序逆向和组件安全实验做一些“标靶”
-  - 使用SharedPreferences持久化存储小数据并按需读取
-  - 实现一个简单的注册码校验功能
-- MainActivity.java
-- DisplayMessageActivity.java
+在`v1`基础之上，我们增加以下新功能来为后续的程序逆向和组件安全实验做一些“标靶”
+- 使用`SharedPreferences`持久化存储小数据并按需读取
+- 实现一个简单的注册码校验功能
+
+#### <span id ="320">2.0 代码编写</span>
+
+* 在v1的基础上，直接粘贴[课本中的代码](https://c4pr1c3.github.io/cuc-mis/chap0x06/exp.html#hello-world-v2)到相应的位置，然后进行简单的修改。
+
+* `MainActivity.java`，`DisplayActivity.java`中，根据提示按`Alt+Enter`导入缺失的类。
+
+  ```java
+  // MainActivity.java
+  import androidx.appcompat.app.AppCompatActivity;
+  import android.content.Context;
+  import android.content.Intent;
+  import android.content.SharedPreferences;
+  import android.os.Bundle;
+  import android.view.View;
+  import android.widget.EditText;
+  // DisplayMessageActivity.java
+  import androidx.appcompat.app.AppCompatActivity;
+  import android.content.Intent;
+  import android.os.Bundle;
+  import android.util.Log;
+  import android.view.ViewGroup;
+  import android.widget.TextView;
+  import java.security.MessageDigest;
+  import java.security.NoSuchAlgorithmException;
+  ```
+
+* `MainActivity.java`，`DisplayMessageActivity.java`代码中有些`String`在`v1`中并没有创建，可以根据提示按`Alt+Shift+Enter`进行新建（value可以根据喜好自定义），也可以在`strings.xml`中手动添加。
+
+  最终`strings.xml`中定义了如下内容：
+
+  ![string-xml](img/string-xml.png)
+
+* `activity_main.xml`中，基本布局不变，将v1中的`editTextTextPersonName3`修改为`edit_message`并选择全局修改。![activity-main-modify](img/activity-main-modify.png)
+
+* `activity_disaplay_message.xml`中，删掉`v1`创建的`TextView`，并将整体的`id`改为`activity_display_message`。因为`v2`的代码中并不会用到`v1`中创建的`TextView`。
+
+  ![image-20210609201713808](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210609201713808.png)
+
+* [项目整体代码在此处](code/HelloWorldv2)。
+
+#### <span id ="321">2.1 运行展示</span>
+
+* 录屏：
+
+  <img src="img/HelloWorldV2.gif" alt="HelloWorldV2" width=350 />
+
+* 说明：
+
+  根据代码逻辑，可知`HelloWorldv2`在启动时会在输入框中显示上一次退出前最后一次的输入。然后会对用户的输入进行验证，即比较`用户的输入字符串`和`SECRET_SEED被MD5加密后的前四位字符串`。如果相同，`DisplayMessageActivity`就输出`Register OK.`，如果不同输出`Register Failed.`。
+
+  代码中`SECRET_SEED=sec.cuc.edu.cn`，`MD5`加密后前四位为`6aea`，所以只有输入`6aea`才会显示`Register OK.`。
+
+  [![MD5加密结果](img/MD5加密结果.png)](http://www.md5.cz/)
+
+#### <span id ="322">2.2 回答问题</span>
+
+- [✅]`DisplayMessageActivity.java`中的2行打印日志语句是否有风险？如果有风险，请给出漏洞利用示范。如果没有风险，请给出理由。
+
+  ```
+  有风险。因为打印出的日志为明文，如果Hacker能拿到输出的日志文件，或者能拿到安装了该应用的Android设备，也可以通过命令导出日志，那么就可以得到用户的机密信息6aea。
+  ```
+
+  在`adb shell`中输入命令`logcat | grep user`即可输出历史日志和正在进行操作的日志，包含用户输入的明文信息：
+
+  ![adb输出日志](img/adb输出日志.png)
+
+- [✅]`SharedPreferences`类在进行读写操作时设置的`Context.MODE_PRIVATE`参数有何作用和意义？还有其他可选参数取值吗？
+
+  ```
+  MODE_PRIVATE：默认操作模式，代表该文件是私有数据，只能被应用本身访问，在该模式下，写入的内容会覆盖原文件的内容
+  MODE_APPEND：检查文件是否存在，存在就把新写入的内容追加到原文件中，否则就创建新文件
+  MODE_WORLD_READABLE：表示当前文件可以被其他应用读取（控制其他应用是否有权限）
+  MODE_WORLD_WRITEABLE：表示当前文件可以被其他应用写入（控制其他应用是否有权限）
+  ```
 
 ## <span id ="4">实验总结</span>
 
@@ -369,11 +447,10 @@ adb shell screenrecord /sdcard/demo.mp4
 
   A1：因为没有`Run 'app'`，所以还没有更新。
 
-- [x] Q2：模拟器自带的录屏功能不好用，模拟设备的screenrecord不能录到鼠标操作
+- [x] Q2：模拟器自带的录屏功能不好用，模拟设备的`screenrecord`不能录到鼠标操作
 
-  A2：使用`win+G`调用windows自带的录屏功能，然后将得到的`MP4`文件转为`GIF`。在互联网上发现一个非常好用的转换网站：[tt0.top](https://tt0.top/)
+  A2：使用`win+G`调用`windows`自带的录屏功能，然后将得到的`MP4`文件转为`GIF`。在互联网上发现一个非常好用的转换网站：[tt0.top](https://tt0.top/)
 
-- [ ] Q3：
 
 ## <span id ="6">参考资料</span>
 
