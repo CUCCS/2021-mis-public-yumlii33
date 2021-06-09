@@ -247,10 +247,9 @@ adb shell screenrecord /sdcard/demo.mp4
 
 #### <span id ="312">1.2 回答问题</span>
 
-- [✅] 按照向导创建的工程在模拟器里运行成功的前提下，生成的APK文件在哪儿保存的？
-
-  ```bash
-\Users\[username]\AndroidStudioProjects\MISDemo\app\buid\outputs\apk\debug
+- [✅] 按照向导创建的工程在模拟器里运行成功的前提下，生成的APK文件在哪儿保存的？  
+  ```
+  \Users\[username]\AndroidStudioProjects\MISDemo\app\buid\outputs\apk\debug
   ```
   
   ![APK位置](img/APK位置.png)
@@ -396,7 +395,7 @@ adb shell screenrecord /sdcard/demo.mp4
 
 * `activity_disaplay_message.xml`中，删掉`v1`创建的`TextView`，并将整体的`id`改为`activity_display_message`。因为`v2`的代码中并不会用到`v1`中创建的`TextView`。
 
-  ![image-20210609201713808](C:\Users\mengli\AppData\Roaming\Typora\typora-user-images\image-20210609201713808.png)
+  ![activity-display-message-modify](img/activity-display-message-modify.png)
 
 * [项目整体代码在此处](code/HelloWorldv2)。
 
