@@ -67,7 +67,7 @@
 
 此处安装了`Android 10.0`，为本人手机目前的`Android`版本。
 
-<img src="img/myPhoneAndroidVersion.png" alt="myPhoneAndroidVersion" style="zoom: 25%;" />
+<img src="img/myPhoneAndroidVersion.png" alt="myPhoneAndroidVersion" width=350 />
 
 安装成功。
 
@@ -113,7 +113,7 @@
 
 * 可以使用在不同的`AVD`上运行自己写的功能应用
 
-  ![appRunonAVD](D:\Project-mis\2021-mis-public-yumlii33\chap0x05\img\appRunonAVD.png)
+  ![appRunonAVD](img/appRunonAVD.png)
 
 ### <span id="024">Part 4</span> 配置Gradle编译环境
 
