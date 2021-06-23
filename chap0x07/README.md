@@ -264,9 +264,7 @@
   adb logcat  ->v2-log.txt
   ```
 
-* 查找`tag-here`，获得正确的验证码
-
-![查找日志](img/查找日志.png)
+* 查找`tag-here`，获得正确的验证码![查找日志](img/查找日志.png)
 
 ### <span id="035">Part 5 对APK文件进行程序图标替换</span>
 
@@ -299,11 +297,11 @@
 
   ![项目成功导入](img/项目成功导入.png)
 
-- [x] **Q1：**创建密钥库和密钥时报错
+- [x] **Q1：** 创建密钥库和密钥时报错
 
   `Android studio 警告: PKCS12 密钥库不支持其他存储和密钥口令。正在忽略用户指定的-keypass值`
   
-  **A1：**参考网上博客，在创建时，`key store`和`key`的`Password`必须一致，这可能是因为`keytool`版本的问题，后续可以通过`keytool`命令修改`Password`。
+  **A1：** 参考网上博客，在创建时，`key store`和`key`的`Password`必须一致，这可能是因为`keytool`版本的问题，后续可以通过`keytool`命令修改`Password`。
   
   <img src="img/newkeystore.png" alt="创建新密钥库" width=500 />
   
@@ -311,19 +309,19 @@
   
   <img src="img/不要勾选RememberPassword.png" alt="不要勾选RememberPassword" width=500  />
   
-- [x] <span id = "QA2">**Q2：**apktool使用报错。</span>
+- [x] <span id = "QA2">**Q2：** apktool使用报错。</span>
 
-  **A2：**因为在使用`vscode`的`apklab`时总是出错，所以还是单独安装`apktool`
+  **A2：** 因为在使用`vscode`的`apklab`时总是出错，所以还是单独安装`apktool`
 
   ​	①配置`java`环境：[Java 开发环境配置](https://www.runoob.com/java/java-environment-setup.html)
 
   ​    ②安装`apktool`工具：[Apktool Install Instructions](https://ibotpeaches.github.io/Apktool/install/)
 
-- [x] **Q3：**关于实验中的第四个要求：
+- [x] **Q3：** 关于实验中的第四个要求：
 
   去掉Hello World v2版程序中DisplayMessageActivity.java代码中的那2行日志打印语句后编译出一个新的apk文件，假设文件名是：misdemo-v3.apk，尝试使用课件中介绍的几种软件逆向分析方法来破解我们的认证算法。
 
-  **A3**：可以采用[Part2](#032)中的两个逆向分析方法。
+  **A3：** 可以采用[Part2](#032)中的两个逆向分析方法。
 
 ## <span id="07">参考资料</span>
 
