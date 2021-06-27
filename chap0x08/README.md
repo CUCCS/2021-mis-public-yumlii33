@@ -8,8 +8,8 @@
 * [实验过程](#03)
   * [Part 0 Part 0 实验环境搭建](#030)
   * [Part 1 Developer Backdoor](#031)
-  * [Part 2 ](#032)
-  * [Part 3 ](#033)
+  * [Part 2 Insecure Logging](#032)
+  * [Part 3 Android Application patching + Weak Auth](#033)
   * [Part 4 ](#034)
   * [Part 5 ](#035)
 * [实验总结](#04)
@@ -134,19 +134,8 @@ InsecureBankv2.apk 应用安装
 
   登录成功
 
-* `apktool`反汇编`InsecureBankv2.apk`
-
-  ```bash
-  # apktool 安装见第七章实验
   
-  apktool d InsecureBankv2.apk -o InsecureBankv20
-  # -o <dir> 指定反汇编结果保存文件夹，默认为[ApkName]
-  ```
 
-  ![反汇编成功](img/反汇编成功.png)
-
-  反汇编成功
-  
 * `Jadx`反编译`InsecureBankv2.apk`
 
   * 安装`Jadx`
@@ -286,11 +275,88 @@ InsecureBankv2.apk 应用安装
 
 #### 3.0 配置
 
+* Android-InsecureBankv2 apk——已下载
 
+* Android SDK——已安装
+
+* `apktool`——第七章实验已安装
+
+* `SignApk`
+
+  ```bash
+  # 安装
+  git clone https://github.com/appium-boneyard/sign.git
+  ```
+
+  但是在`windows`上安装好像有点问题，可以使用第七章的签名方法签名
 
 #### 3.1 步骤
 
+1. 安装`InsecureBankv2.apk`到模拟器（√ 前面的步骤中已经完成，不赘述）
+
+2. 在模拟器中启动`InsecureBankv2.apk`（√ ）
+
+3. 将`InsecureBankv2.apk`复制到`apktool`目录下，并输入命令反编译
+
+   因为第七章实验中已经将`apktool`的路径加入了环境变量，所以在任何目录下可以执行反编译命令
+
+   ```bash
+   # apktool 安装见第七章实验
+   # 直接在"...\Android-InsecureBankv2\"目录下执行
+   
+   apktool d InsecureBankv2.apk -o InsecureBankv2-smali
+   # -o <dir> 指定反汇编结果保存文件夹，默认为[ApkName]
+   ```
+
+   ![反汇编成功](img/反汇编成功.png)
+
+   反汇编成功
+
+4. 导航到`...\Android-InsecureBankv2\InsecureBankv2-smali\res\values\`，打开`String.xml`进行编辑
+
+   ![修改string-xml-is-admin为yes](img/3-修改string-xml-is-admin为yes.png)
+
+   修改好后保存
+
+5. 导航回到`...\Android-InsecureBankv2`，重新编译：
+
+   ```bash
+   apktool b InsecureBankv2-smali
+   ```
+
+   ![重新生成apk文件](img/3-重新生成apk文件.png)
+
+6. 对新生成的`apk`文件签名（不签名无法安装）
+
+   ```bash
+   cd InsecureBankv2-smali\dist
+   C:\Users\mengli\AppData\Local\Android\Sdk\build-tools\30.0.2\apksigner sign --min-sdk-version 19 --ks D:\keystore0622.jks --out InsecureBankv2-signed.apk InsecureBankv2.apk
+   ```
+
+   ![重签名成功](img/3-重签名成功.png)
+
+7. 安装`InsecureBankv2-signed.apk`到模拟器中
+
+   ```bash
+   # 先卸载
+   adb install  InsecureBankv2-signed.apk
+   ```
+
+   ![重新安装](img/3-重新安装apk.png)
+
+8. 在模拟器中启动新安装的`InsecureBankv2`，发现界面多了一个额外的`Create user`按钮。
+
+   <img src="img/3-普通用户视角.png" alt="普通用户视角" width=300 /><img src="img/3-admin用户视角.png" alt="admin用户视角" width=300 />
+
+   该按钮只对`admin`用户可见，所以之前看不到。
+
+9. 尝试点击`Create user`按钮创建新用户，但并没有创建，这是假的创建用户按钮，并没有实现功能。
+
+   <img src="img/3-点击创建用户按钮.png" alt="点击创建用户按钮" width=250 /><img src="img/3-点击创建用户服务器显示信息.png" alt="服务器显示信息" width=500 />
+
 #### 3.2 小结
+
+`apk`文件可以使用工具`apktool`进行反编译，通过修改反编译出来的代码，再重打包重签名，获取`admin`权限。
 
 ### <span id="034">Part 4 `Exploiting Android Broadcast Receivers`</span>
 
