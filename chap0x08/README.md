@@ -8,7 +8,10 @@
 * [实验过程](#03)
   * [Part 0 Part 0 实验环境搭建](#030)
   * [Part 1 Developer Backdoor](#031)
-  * [Part 3 ](#032)
+  * [Part 2 ](#032)
+  * [Part 3 ](#033)
+  * [Part 4 ](#034)
+  * [Part 5 ](#035)
 * [实验总结](#04)
 * [问题和解决](#05)
 * [课后作业](#06)
@@ -225,25 +228,85 @@ InsecureBankv2.apk 应用安装
 
 #### 1.2 小结
 
-开发者在开发应用的时候留了后门，如果指导了后门，非常容易绕过验证破解成功。
+开发者在开发应用的时候留了后门，如果知道了后门，非常容易绕过验证破解成功。
 
 
 
 ### <span id="032">Part 2 `Insecure Logging`</span>
 
+#### 2.0 配置
+
+* Android-InsecureBankv2 apk ——已经在`Part 0`中下载完成
+* Android SDK——已在第五章实验中下载完成
+
+#### 2.1 步骤
+
+1. 将` InsecureBankv2.apk`文件复制到`Android SDK`的`platform-tools`文件夹中，然后使用`adb install  InsecureBankv2.apk`
+
+   在`Part 0`中已经安装成功，可以直接使用，也可以卸载重装
+
+2. 在命令行使用`adb logcat`查看日志
+
+   直接输出在命令行不好分析。将输出到txt文件中，使用`ctrl+c`结束打印日志
+
+   ![日志输出到文件](img/2-日志输出到文件.png)
+
+3. 在模拟器上启动已安装的`InsecureBankv2`应用程序
+
+4. 输入有效的凭据并点击`Login`
+
+   ```
+   User: dinesh
+   Password: Dinesh@123$
+   ```
+
+   <img src="img/2-成功登录截图.png" alt="成功登录" width=300 /><img src="img/2-修改密码成功截图.png" alt="修改密码成功" width=300 />
+
+   下面的屏幕截图显示了日志里记录的凭据：
+
+   ![日志中SuccessfulLogin](img/2-日志中SuccessfulLogin.png)
+
+5. 进入“更改密码”页面，输入新的凭据
+
+   ```
+   修改密钥为：Dinesh@321$
+   ```
+
+   下面的屏幕截图显示了在日志里记录的新凭据：
+
+   ![2-日志中ChangePassword](img/2-日志中ChangePassword.png)
+
+#### 2.2 小结
+
+应用程序将用户的输入明文记录在日志中，如果被窃取到用户日志，即可获得登录过的账户和密钥。
+
 
 
 ### <span id="033">Part 3 `Android Application patching + Weak Auth`</span>
 
+#### 3.0 配置
 
+
+
+#### 3.1 步骤
+
+#### 3.2 小结
 
 ### <span id="034">Part 4 `Exploiting Android Broadcast Receivers`</span>
 
+#### 4.0 配置
 
+#### 4.1 步骤
+
+#### 4.2 小结
 
 ### <span id="035">Part 5 `Exploiting Android Content Provider`</span>
 
+#### 5.0 配置
 
+#### 5.1 步骤
+
+#### 5.2 小结
 
 
 
