@@ -7,7 +7,7 @@
 * [实验要求](#02)
 * [实验过程](#03)
   * [Part 0 Part 0 实验环境搭建](#030)
-  * [Part 1 ](#031)
+  * [Part 1 Developer Backdoor](#031)
   * [Part 3 ](#032)
 * [实验总结](#04)
 * [问题和解决](#05)
@@ -57,6 +57,8 @@
 python2.7 环境
 AndroLabServer 服务
 InsecureBankv2.apk 应用安装
+反汇编
+反编译
 ```
 
 * 首先配置`python 2.7`环境
@@ -129,34 +131,135 @@ InsecureBankv2.apk 应用安装
 
   登录成功
 
-* 反编译`InsecureBankv2.apk`
+* `apktool`反汇编`InsecureBankv2.apk`
 
   ```bash
   # apktool 安装见第七章实验
   
-  apktool d InsecureBankv2.apk -o InsecureBankv2-smali
-  # -o <dir> 指定路径，默认路径为InsecureBankv2
+  apktool d InsecureBankv2.apk -o InsecureBankv20
+  # -o <dir> 指定反汇编结果保存文件夹，默认为[ApkName]
   ```
 
-  ![反编译成功](img/反编译成功.png)
+  ![反汇编成功](img/反汇编成功.png)
 
-  反编译成功
+  反汇编成功
+  
+* `Jadx`反编译`InsecureBankv2.apk`
 
-### <span id="031">Part 1 </span>
+  * 安装`Jadx`
 
-### <span id="032">Part 2</span>
+    ```bash
+    # 由于上一个实验没有安装Jadx环境，所以先安装
+    git clone https://github.com/skylot/jadx.git
+    cd jadx
+    gradlew.bat dist
+    ```
+
+    ![jadx安装成功](img/jadx安装成功.png)
+
+  * 反编译
+
+    安装成功后可以使用`jdax-gui-dev.exe`打开`jdk`进行反编译
+
+    ![jdax-gui](img/jdax-gui.png)
+
+    如下图，左边为反编译结果，右边为仓库里的源代码，反编译结果和源代码有细微差别，但代码逻辑都一致
+
+    ![反编译成功](img/反编译成功.png)
+
+    反编译成功
+
+### <span id="031">Part 1`Developer Backdoor`</span>
+
+#### 1.0 配置
+
+* Android-InsecureBankv2 apk ——已经在`Part 0`中下载完成
+*  JADX ——已经在`Part 0`中下载安装
+* dex2jar——点击下载[当前最新版](https://sourceforge.net/projects/dex2jar/files/dex2jar-2.0.zip/download)到本地解压缩即可
+
+#### 1.1 步骤
+
+1. 解压缩`InsecureBankv2.apk`，直接`右键使用7zip解压缩`
+
+   ![image-20210627144909435](D:\Project-mis\2021-mis-public-yumlii33\chap0x08\img\解压缩apk.png)
+
+2. 复制`classes.dex`文件到`dex2jar`目录下
+
+   ![dex2jar目录](img/dex2jar目录.png)
+
+   
+
+3. 使用下面的命令将dex文件转换为jar文件
+
+   ```bash
+   d2j-dex2jar.bat classes.dex
+   ```
+
+   注意：本实验是在`windows`系统下操作，然而实验指南是`ubuntu`系统。`windows`系统下执行`.bat`文件而不是`.sh`文件。
+
+   ![dex文件转jar文件](img/dex文件转jar文件.png)
+
+   生成的`jar`文件为：`classes-dex2jar.jar`
+
+4. 使用`JADX-GUI`打开`classes-dex2jar.jar`文件
+
+   进入目录：`...jadx\build\jadx\bin\`，双击`jadx-gui.bat`，选择`classes-dex2jar.jar`文件：
+
+   ![使用jadx打开jar文件](img/1-使用jadx打开jar文件.png)
+
+   或者使用命令打开：
+
+   ```bash
+   jadx-gui.bat <path to classes-dex2jar.jar>
+   ```
+
+5. 下面的屏幕截图显示了Android-InsecureBankv2应用程序中开发人员后门的反编译代码，允许用户名为“devadmin”的用户与其他所有用户相比到达不同的端点。
+
+   ![反编译代码中的dologin](img/1-反编译代码中的dologin.png)
+
+6. 进行测试：
+
+   ![录屏gif](D:\Project-mis\2021-mis-public-yumlii33\chap0x08\img\1-预留后门测试录屏.gif)
+
+   我们发现，任何用户都可以使用用户名“devadmin”，并使用任何密码登录应用程序，而不管密码是否有效。
+
+#### 1.2 小结
+
+开发者在开发应用的时候留了后门，如果指导了后门，非常容易绕过验证破解成功。
+
+
+
+### <span id="032">Part 2 `Insecure Logging`</span>
+
+
+
+### <span id="033">Part 3 `Android Application patching + Weak Auth`</span>
+
+
+
+### <span id="034">Part 4 `Exploiting Android Broadcast Receivers`</span>
+
+
+
+### <span id="035">Part 5 `Exploiting Android Content Provider`</span>
+
+
+
+
 
 ## <span id="04">实验总结</span>
 
 ## <span id="05">问题和解决</span>
 
-- [ ] **Q0：**
+- [x] **Q0：** `sh d2j-dex2jar.sh classes.dex`命令执行失败
 
-  **A0：**
+  ![sh文件执行失败](img/sh文件执行失败.png)
 
-- [ ] **Q1：**
+  **A0：**在windows系统下要执行`.bat`命令：`d2j-dex2jar.bat classes.dex`
 
-  **A1：**
+- [x] **Q1：** `mp4`转`gif`失败，原始工具不好用了。
+
+  **A1：**发现新的录屏和`GIF`制作软件[ScreenToGif](https://www.screentogif.com/)，非常好用。另外`腾讯QQ`自带的录屏功能也很好用。
 
 ## <span id="06">课后作业</span>
 
