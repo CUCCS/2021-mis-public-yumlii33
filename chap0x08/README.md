@@ -6,12 +6,12 @@
 * [实验环境](#01)
 * [实验要求](#02)
 * [实验过程](#03)
-  * [Part 0 Part 0 实验环境搭建](#030)
-  * [Part 1 Developer Backdoor](#031)
-  * [Part 2 Insecure Logging](#032)
-  * [Part 3 Android Application patching + Weak Auth](#033)
-  * [Part 4 ](#034)
-  * [Part 5 ](#035)
+  * [Part 0 实验环境搭建](#030)
+  * [Part 1 `Developer Backdoor`](#031)
+  * [Part 2 `Insecure Logging`](#032)
+  * [Part 3 `Android Application patching + Weak Auth`](#033)
+  * [Part 4 `Exploiting Android Broadcast Receivers`](#034)
+  * [Part 5 `Exploiting Android Content Provider`](#035)
 * [实验总结](#04)
 * [问题和解决](#05)
 * [课后作业](#06)
@@ -60,8 +60,6 @@
 python2.7 环境
 AndroLabServer 服务
 InsecureBankv2.apk 应用安装
-反汇编
-反编译
 ```
 
 * 首先配置`python 2.7`环境
@@ -136,44 +134,31 @@ InsecureBankv2.apk 应用安装
 
   
 
-* `Jadx`反编译`InsecureBankv2.apk`
-
-  * 安装`Jadx`
-
-    ```bash
-    # 由于上一个实验没有安装Jadx环境，所以先安装
-    git clone https://github.com/skylot/jadx.git
-    cd jadx
-    gradlew.bat dist
-    ```
-
-    ![jadx安装成功](img/jadx安装成功.png)
-
-  * 反编译
-
-    安装成功后可以使用`jdax-gui-dev.exe`打开`jdk`进行反编译
-
-    ![jdax-gui](img/jdax-gui.png)
-
-    如下图，左边为反编译结果，右边为仓库里的源代码，反编译结果和源代码有细微差别，但代码逻辑都一致
-
-    ![反编译成功](img/反编译成功.png)
-
-    反编译成功
 
 ### <span id="031">Part 1`Developer Backdoor`</span>
 
 #### 1.0 配置
 
-* Android-InsecureBankv2 apk ——已经在`Part 0`中下载完成
-*  JADX ——已经在`Part 0`中下载安装
-* dex2jar——点击下载[当前最新版](https://sourceforge.net/projects/dex2jar/files/dex2jar-2.0.zip/download)到本地解压缩即可
+* `Android-InsecureBankv2 apk` ——已经在`Part 0`中下载完成
+
+* `JADX `
+
+  ```bash
+  # 由于上一个实验没有安装Jadx环境，所以先安装
+  git clone https://github.com/skylot/jadx.git
+  cd jadx
+  gradlew.bat dist
+  ```
+
+  ![jadx安装成功](img/jadx安装成功.png)
+
+* `dex2jar`——点击下载[当前最新版](https://sourceforge.net/projects/dex2jar/files/dex2jar-2.0.zip/download)到本地解压缩即可
 
 #### 1.1 步骤
 
 1. 解压缩`InsecureBankv2.apk`，直接`右键使用7zip解压缩`
 
-   ![image-20210627144909435](D:\Project-mis\2021-mis-public-yumlii33\chap0x08\img\解压缩apk.png)
+   ![image-20210627144909435](img/解压缩apk.png)
 
 2. 复制`classes.dex`文件到`dex2jar`目录下
 
@@ -181,7 +166,7 @@ InsecureBankv2.apk 应用安装
 
    
 
-3. 使用下面的命令将dex文件转换为jar文件
+3. 使用下面的命令将`.dex`文件转换为`.jar`文件
 
    ```bash
    d2j-dex2jar.bat classes.dex
@@ -205,15 +190,19 @@ InsecureBankv2.apk 应用安装
    jadx-gui.bat <path to classes-dex2jar.jar>
    ```
 
-5. 下面的屏幕截图显示了Android-InsecureBankv2应用程序中开发人员后门的反编译代码，允许用户名为“devadmin”的用户与其他所有用户相比到达不同的端点。
+5. 下面的屏幕截图显示了`Android-InsecureBankv2`应用程序中开发人员后门的反编译代码，允许用户名为`devadmin`的用户与其他所有用户相比到达不同的端点。
 
    ![反编译代码中的dologin](img/1-反编译代码中的dologin.png)
 
-6. 进行测试：
+   另外，如下图，左边为反编译结果，右边为仓库里的源代码，反编译结果和源代码有细微差别，但代码逻辑都一致
 
-   ![录屏gif](D:\Project-mis\2021-mis-public-yumlii33\chap0x08\img\1-预留后门测试录屏.gif)
+   ![反编译成功](img/反编译成功.png)
 
-   我们发现，任何用户都可以使用用户名“devadmin”，并使用任何密码登录应用程序，而不管密码是否有效。
+6. 进行测试
+
+   ![录屏gif](img/1-预留后门测试录屏.gif)
+
+   我们发现，任何用户都可以使用用户名`devadmin`，并使用任何密码登录应用程序，而不管密码是否有效。
 
 #### 1.2 小结
 
@@ -225,8 +214,8 @@ InsecureBankv2.apk 应用安装
 
 #### 2.0 配置
 
-* Android-InsecureBankv2 apk ——已经在`Part 0`中下载完成
-* Android SDK——已在第五章实验中下载完成
+* `Android-InsecureBankv2 apk` ——已经在`Part 0`中下载完成
+* `Android SDK`——已在第五章实验中下载完成
 
 #### 2.1 步骤
 
@@ -275,9 +264,9 @@ InsecureBankv2.apk 应用安装
 
 #### 3.0 配置
 
-* Android-InsecureBankv2 apk——已下载
+* `Android-InsecureBankv2 apk`——已下载
 
-* Android SDK——已安装
+* `Android SDK`——已安装
 
 * `apktool`——第七章实验已安装
 
@@ -296,7 +285,7 @@ InsecureBankv2.apk 应用安装
 
 2. 在模拟器中启动`InsecureBankv2.apk`（√ ）
 
-3. 将`InsecureBankv2.apk`复制到`apktool`目录下，并输入命令反编译
+3. 将`InsecureBankv2.apk`复制到`apktool`目录下，并输入命令反汇编
 
    因为第七章实验中已经将`apktool`的路径加入了环境变量，所以在任何目录下可以执行反编译命令
 
@@ -356,23 +345,131 @@ InsecureBankv2.apk 应用安装
 
 #### 3.2 小结
 
-`apk`文件可以使用工具`apktool`进行反编译，通过修改反编译出来的代码，再重打包重签名，获取`admin`权限。
+`apk`文件可以使用`apktool`等工具进行反编译，通过修改反编译出来的代码，再重打包重签名，可以轻易绕过脆弱认证，获取`admin`权限。
 
 ### <span id="034">Part 4 `Exploiting Android Broadcast Receivers`</span>
 
 #### 4.0 配置
 
+* `Android-InsecureBankv2 apk`——已在`Part 0`中安装
+* `Android SDK`——已在`Part 0`中下载安装
+* `apktool`——已在`实验七`中安装
+* `JADX` ——已在`Part 1`中安装
+* `dex2jar`——已在`Part 1`中安装
+
 #### 4.1 步骤
 
+1. 安装`InsecureBankv2.apk`到模拟器（ √ 前面的步骤中已经完成，不赘述）
+
+2. 在模拟器中启动`InsecureBankv2.apk`（ √ ）
+
+3. 将`InsecureBankv2.apk`复制到`apktool`目录下，并输入命令反编译（ √ ）
+
+4. 打开解密的`AndroidManifest.xml`文件
+
+   ![AndroidMainfest-xml](img/4-AndroidMainfest-xml.png)
+
+5. 反编译`InsecureBankv2.apk`的步骤，已经在`Part 1 - 1`中完成
+
+6. 反编译`InsecureBankv2.apk`的步骤，已经在`Part 1 - 2`中完成
+
+7. 反编译`InsecureBankv2.apk`的步骤，已经在`Part 1 - 3`中完成
+
+8. 反编译`InsecureBankv2.apk`的步骤，已经在`Part 1 - 4`中完成
+
+9. 下面的屏幕截图显示了传递给前面显示的应用程序中声明的`Broadcast Receiver`的参数
+
+   ![changepassword.xml](img/4-changepassword-xml.png)
+
+   ![mybroadcastreceiver](img/4-mybroadcastreceiver.png)
+
+10. 在模拟器上安装：`adb install InsecureBankv2.apk`（ √ )
+
+11. 打开应用 （ √ ），注意并不需要输入用户名和密码登录
+
+12. 在命令行中打开`adb shell`
+
+    ![adb-shell](img/4-adb-shell.png)
+
+13. 输入下面的命令（绕过登录直接修改密码）
+
+    ```bash
+    am broadcast -a theBroadcast -n com.android.insecurebankv2/com.android.insecurebankv2.MyBroadCastReceiver --es phonenumber 5554 --es newpass Dinesh@123!
+    ```
+
+    ![在命令行中输入am命令](img/4-在命令行中输入am命令.png)
+
+14. 回到模拟器中，打开`Messages`应用，发现
+
+    上述输入的命令自动发送短信联系上述广播接收器，并发送带有密码的短信文本（左图）
+
+    <img src="img/4-messages应用发送修改请求和接收到修改成功的响应.png" alt="messages应用发送修改请求和接收到修改成功的响应" width=280 /><img src="img/4-修改密码会收到修改成功的短信提示.png" alt="修改密码会收到修改成功的短信提示" width=280 />
+
+15. 手动修改，也会有`修改请求`和`修改成功`的短信记录（上面 右图）
+
 #### 4.2 小结
+
+可以使用工具绕过登录直接修改用户密钥。
+
+测试还发现，在`app`中手动修改密码也会有`修改请求`和`修改成功`的短信记录，如果窃取到短信记录，就会泄露信息。
 
 ### <span id="035">Part 5 `Exploiting Android Content Provider`</span>
 
 #### 5.0 配置
 
+* `Android-InsecureBankv2 apk`——已在`Part 0`中安装
+* `Android SDK`——已在`Part 0`中下载安装
+* `apktool`——已在`实验七`中安装
+* `JADX` ——已在`Part 1`中安装
+* `dex2jar`——已在`Part 1`中安装
+
 #### 5.1 步骤
 
+1. 使用`adb install InsecureBankv2.apk`在模拟器中安装应用（ √ ）
+
+2. 在模拟器上启动已安装的`InsecureBankv2`应用程序
+
+3. 先使用`dinesh/Dinesh@123$`登录应用，再使用`jack/Jack@123$`登录应用
+
+4. 使用`apktool`工具反汇编`InsecureBankv2.apk`（ √ ）
+
+5. 打开`AndroidMainfest.xml`文件，找到`TrackUserContentProvider`
+
+   ![TrackUserContentProvider](img/TrackUserContentProvider.png)
+
+6. 反编译步骤 （√ ）
+
+7. 反编译步骤 （√ ）
+
+8. 反编译步骤 （√ ）
+
+9. 反编译步骤 （√ ）
+
+10. 在反编译文件中发现，传过来的数据会被保存到设备的`sql`数据库中：
+
+    ![反编译的TrackUserContentProvider](img/5-TrackUserContentProvider.png)
+
+11. 安装`InsecureBankv2.apk` （ √ ）
+
+12. 启动`InsecureBankv2`应用
+
+13. 打开命令行
+
+14. 输入`adb shell`进入`adb命令行`
+
+15. 输入下命令
+
+    ```bash
+    content query --uri content://com.android.insecurebankv2.TrackUserContentProvider/trackerusers
+    ```
+
+    ![登录记录](img/5-登录记录.png)
+
+    发现登录记录`id= , name= `以明文的方式记录在设备上
+
 #### 5.2 小结
+
+应用程序以明文的方式保存`登录记录`，如果得到设备或者设备上的记录，就能得到存在的用户的用户名，再使用`Part 4`中的方法即可绕过登录修改用户密码。
 
 
 
@@ -384,11 +481,11 @@ InsecureBankv2.apk 应用安装
 
   ![sh文件执行失败](img/sh文件执行失败.png)
 
-  **A0：**在windows系统下要执行`.bat`命令：`d2j-dex2jar.bat classes.dex`
+  **A0：** 在windows系统下要执行`.bat`命令：`d2j-dex2jar.bat classes.dex`
 
 - [x] **Q1：** `mp4`转`gif`失败，原始工具不好用了。
 
-  **A1：**发现新的录屏和`GIF`制作软件[ScreenToGif](https://www.screentogif.com/)，非常好用。另外`腾讯QQ`自带的录屏功能也很好用。
+  **A1：** 发现新的录屏和`GIF`制作软件[ScreenToGif](https://www.screentogif.com/)，非常好用。另外`腾讯QQ`自带的录屏功能也很好用。
 
 ## <span id="06">课后作业</span>
 
