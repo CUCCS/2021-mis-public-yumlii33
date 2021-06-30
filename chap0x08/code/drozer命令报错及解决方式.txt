@@ -1,0 +1,270 @@
+C:\                                                                                                                                                         
+λ cd C:\Python27\Scripts                                                                                                                                    
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ ls                                                                                                                                                        
+calc-prorate.exe*  drozer-complete*       pip.exe*                 pywin32_testall.py                                                                       
+cheroot.exe*       drozer-repository*     pip2.7.exe*              pywin32_testall.pyc                                                                      
+cherryd.exe*       easy_install.exe*      pip2.exe*                                                                                                         
+drozer*            easy_install-2.7.exe*  pywin32_postinstall.py                                                                                            
+drozer.bat         flask.exe*             pywin32_postinstall.pyc                                                                                           
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ adb forward tcp:31415 tcp:31415                                                                                                                           
+31415                                                                                                                                                       
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ drozer.bat console connect                                                                                                                                
+Traceback (most recent call last):                                                                                                                          
+  File "C:\Python27\Scripts\drozer", line 30, in <module>                                                                                                   
+    __import__("drozer.cli.%s" % (sys.argv[1]))                                                                                                             
+  File "C:\Python27\lib\site-packages\drozer\cli\console.py", line 8, in <module>                                                                           
+    from drozer.console import Console                                                                                                                      
+  File "C:\Python27\lib\site-packages\drozer\console\__init__.py", line 4, in <module>                                                                      
+    from drozer.console.console import Console                                                                                                              
+  File "C:\Python27\lib\site-packages\drozer\console\console.py", line 5, in <module>                                                                       
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\__init__.py", line 9, in <module>                                                                        
+    from pydiesel.api.frame import Frame                                                                                                                    
+  File "C:\Python27\lib\site-packages\pydiesel\api\frame.py", line 3, in <module>                                                                           
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\protobuf_pb2.py", line 3, in <module>                                                                    
+    from google.protobuf import descriptor                                                                                                                  
+ImportError: No module named google.protobuf                                                                                                                
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ drozer.bat console connect                                                                                                                                
+Traceback (most recent call last):                                                                                                                          
+  File "C:\Python27\Scripts\drozer", line 30, in <module>                                                                                                   
+    __import__("drozer.cli.%s" % (sys.argv[1]))                                                                                                             
+  File "C:\Python27\lib\site-packages\drozer\cli\console.py", line 8, in <module>                                                                           
+    from drozer.console import Console                                                                                                                      
+  File "C:\Python27\lib\site-packages\drozer\console\__init__.py", line 4, in <module>                                                                      
+    from drozer.console.console import Console                                                                                                              
+  File "C:\Python27\lib\site-packages\drozer\console\console.py", line 5, in <module>                                                                       
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\__init__.py", line 9, in <module>                                                                        
+    from pydiesel.api.frame import Frame                                                                                                                    
+  File "C:\Python27\lib\site-packages\pydiesel\api\frame.py", line 3, in <module>                                                                           
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\protobuf_pb2.py", line 3, in <module>                                                                    
+    from google.protobuf import descriptor                                                                                                                  
+ImportError: No module named google.protobuf                                                                                                                
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ set path=C:\Python27;C:\Python27\Scripts;%path%                                                                                                           
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ drozer.bat console connect                                                                                                                                
+Traceback (most recent call last):                                                                                                                          
+  File "C:\Python27\Scripts\drozer", line 30, in <module>                                                                                                   
+    __import__("drozer.cli.%s" % (sys.argv[1]))                                                                                                             
+  File "C:\Python27\lib\site-packages\drozer\cli\console.py", line 8, in <module>                                                                           
+    from drozer.console import Console                                                                                                                      
+  File "C:\Python27\lib\site-packages\drozer\console\__init__.py", line 4, in <module>                                                                      
+    from drozer.console.console import Console                                                                                                              
+  File "C:\Python27\lib\site-packages\drozer\console\console.py", line 5, in <module>                                                                       
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\__init__.py", line 9, in <module>                                                                        
+    from pydiesel.api.frame import Frame                                                                                                                    
+  File "C:\Python27\lib\site-packages\pydiesel\api\frame.py", line 3, in <module>                                                                           
+    from pydiesel.api.protobuf_pb2 import Message                                                                                                           
+  File "C:\Python27\lib\site-packages\pydiesel\api\protobuf_pb2.py", line 3, in <module>                                                                    
+    from google.protobuf import descriptor                                                                                                                  
+ImportError: No module named google.protobuf                                                                                                                
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install  google.protobuf                                                                                                                              
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting google.protobuf                                                                                                                                  
+  ERROR: Could not find a version that satisfies the requirement google.protobuf (from versions: none)                                                      
+ERROR: No matching distribution found for google.protobuf                                                                                                   
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install  google.protobuf                                                                                                                              
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting google.protobuf                                                                                                                                  
+  ERROR: Could not find a version that satisfies the requirement google.protobuf (from versions: none)                                                      
+ERROR: No matching distribution found for google.protobuf                                                                                                   
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install  protobuf                                                                                                                                     
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting protobuf                                                                                                                                         
+  Downloading https://files.pythonhosted.org/packages/d5/e0/20ba06eb42155cdb4c741e5caf9946e4569e26d71165abaecada18c58603/protobuf-3.17.3-py2.py3-none-any.wh
+(173kB)                                                                                                                                                     
+     |████████████████████████████████| 174kB 660kB/s                                                                                                       
+Requirement already satisfied: six>=1.9 in c:\python27\lib\site-packages (from protobuf) (1.16.0)                                                           
+ERROR: drozer 2.4.4 requires pyopenssl>=16.2, which is not installed.                                                                                       
+ERROR: drozer 2.4.4 requires pyyaml>=3.11, which is not installed.                                                                                          
+Installing collected packages: protobuf                                                                                                                     
+Successfully installed protobuf-3.17.3                                                                                                                      
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install pyopenssl                                                                                                                                     
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting pyopenssl                                                                                                                                        
+  Downloading https://files.pythonhosted.org/packages/b2/5e/06351ede29fd4899782ad335c2e02f1f862a887c20a3541f17c3fa1a3525/pyOpenSSL-20.0.1-py2.py3-none-any.w
+ (54kB)                                                                                                                                                     
+     |████████████████████████████████| 61kB 602kB/s                                                                                                        
+Requirement already satisfied: six>=1.5.2 in c:\python27\lib\site-packages (from pyopenssl) (1.16.0)                                                        
+Collecting cryptography>=3.2 (from pyopenssl)                                                                                                               
+  Downloading https://files.pythonhosted.org/packages/17/98/d1c0595b0d20a156147e3a5784d792d60fba9d736ea09ec13475a99b5455/cryptography-3.3.2-cp27-cp27m-win32
+hl (1.3MB)                                                                                                                                                  
+     |████████████████████████████████| 1.3MB 664kB/s                                                                                                       
+Collecting cffi>=1.12 (from cryptography>=3.2->pyopenssl)                                                                                                   
+  Downloading https://files.pythonhosted.org/packages/87/09/54a44fde753c7a92603513d62b44b41127f8cd513f7672231eac4b07959a/cffi-1.14.5-cp27-cp27m-win32.whl (1
+kB)                                                                                                                                                         
+     |████████████████████████████████| 163kB 812kB/s                                                                                                       
+Collecting enum34; python_version < "3" (from cryptography>=3.2->pyopenssl)                                                                                 
+  Downloading https://files.pythonhosted.org/packages/6f/2c/a9386903ece2ea85e9807e0e062174dc26fdce8b05f216d00491be29fad5/enum34-1.1.10-py2-none-any.whl     
+Collecting ipaddress; python_version < "3" (from cryptography>=3.2->pyopenssl)                                                                              
+  Downloading https://files.pythonhosted.org/packages/c2/f8/49697181b1651d8347d24c095ce46c7346c37335ddc7d255833e7cde674d/ipaddress-1.0.23-py2.py3-none-any.w
+                                                                                                                                                            
+Collecting pycparser (from cffi>=1.12->cryptography>=3.2->pyopenssl)                                                                                        
+  Downloading https://files.pythonhosted.org/packages/ae/e7/d9c3a176ca4b02024debf82342dab36efadfc5776f9c8db077e8f6e71821/pycparser-2.20-py2.py3-none-any.whl
+112kB)                                                                                                                                                      
+     |████████████████████████████████| 112kB 588kB/s                                                                                                       
+ERROR: drozer 2.4.4 requires pyyaml>=3.11, which is not installed.                                                                                          
+Installing collected packages: pycparser, cffi, enum34, ipaddress, cryptography, pyopenssl                                                                  
+Successfully installed cffi-1.14.5 cryptography-3.3.2 enum34-1.1.10 ipaddress-1.0.23 pycparser-2.20 pyopenssl-20.0.1                                        
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install pyopensslpyyaml                                                                                                                               
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting pyopensslpyyaml                                                                                                                                  
+  ERROR: Could not find a version that satisfies the requirement pyopensslpyyaml (from versions: none)                                                      
+ERROR: No matching distribution found for pyopensslpyyaml                                                                                                   
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install pyyaml                                                                                                                                        
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting pyyaml                                                                                                                                           
+  Downloading https://files.pythonhosted.org/packages/f0/2e/bf126726a0136f0d187437f4937ab9ad0da71dd9c3bfdb8dde9809811dd3/PyYAML-5.4.1-cp27-cp27m-win32.whl (
+1kB)                                                                                                                                                        
+     |████████████████████████████████| 194kB 875kB/s                                                                                                       
+Installing collected packages: pyyaml                                                                                                                       
+Successfully installed pyyaml-5.4.1                                                                                                                         
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install pyopenssl                                                                                                                                     
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Requirement already satisfied: pyopenssl in c:\python27\lib\site-packages (20.0.1)                                                                          
+Requirement already satisfied: six>=1.5.2 in c:\python27\lib\site-packages (from pyopenssl) (1.16.0)                                                        
+Requirement already satisfied: cryptography>=3.2 in c:\python27\lib\site-packages (from pyopenssl) (3.3.2)                                                  
+Requirement already satisfied: cffi>=1.12 in c:\python27\lib\site-packages (from cryptography>=3.2->pyopenssl) (1.14.5)                                     
+Requirement already satisfied: enum34; python_version < "3" in c:\python27\lib\site-packages (from cryptography>=3.2->pyopenssl) (1.1.10)                   
+Requirement already satisfied: ipaddress; python_version < "3" in c:\python27\lib\site-packages (from cryptography>=3.2->pyopenssl) (1.0.23)                
+Requirement already satisfied: pycparser in c:\python27\lib\site-packages (from cffi>=1.12->cryptography>=3.2->pyopenssl) (2.20)                            
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ drozer.bat console connect                                                                                                                                
+C:\Python27\lib\site-packages\OpenSSL\crypto.py:14: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it 
+ now deprecated in cryptography, and will be removed in the next release.                                                                                   
+  from cryptography import utils, x509                                                                                                                      
+drozer Server requires Twisted to run.                                                                                                                      
+Run 'pip install twisted' to fetch this dependency.                                                                                                         
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ pip install twisted                                                                                                                                       
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A
+uture version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development
+elease-process/#python-2-support                                                                                                                            
+Collecting twisted                                                                                                                                          
+  Downloading https://files.pythonhosted.org/packages/31/fa/02d96bb2aa336e792f37c41d770d6db5712b82a9c00971d1367da2f07bcf/Twisted-20.3.0-cp27-cp27m-win32.whl
+3.2MB)                                                                                                                                                      
+     |████████████████████████████████| 3.2MB 588kB/s                                                                                                       
+Collecting Automat>=0.3.0 (from twisted)                                                                                                                    
+  Downloading https://files.pythonhosted.org/packages/dd/83/5f6f3c1a562674d65efc320257bdc0873ec53147835aeef7762fe7585273/Automat-20.2.0-py2.py3-none-any.whl
+Collecting attrs>=19.2.0 (from twisted)                                                                                                                     
+  Downloading https://files.pythonhosted.org/packages/20/a9/ba6f1cd1a1517ff022b35acd6a7e4246371dfab08b8e42b829b6d07913cc/attrs-21.2.0-py2.py3-none-any.whl (
+kB)                                                                                                                                                         
+     |████████████████████████████████| 61kB 558kB/s                                                                                                        
+Collecting PyHamcrest!=1.10.0,>=1.9.0 (from twisted)                                                                                                        
+  Downloading https://files.pythonhosted.org/packages/d9/6b/fb2e701f25303c620149923d98085c6d7b052d112044764cbf00cc07469e/PyHamcrest-1.10.1.tar.gz (43kB)    
+     |████████████████████████████████| 51kB 711kB/s                                                                                                        
+Collecting constantly>=15.1 (from twisted)                                                                                                                  
+  Downloading https://files.pythonhosted.org/packages/b9/65/48c1909d0c0aeae6c10213340ce682db01b48ea900a7d9fce7a7910ff318/constantly-15.1.0-py2.py3-none-any.
+l                                                                                                                                                           
+Collecting hyperlink>=17.1.1 (from twisted)                                                                                                                 
+  Downloading https://files.pythonhosted.org/packages/6e/aa/8caf6a0a3e62863cbb9dab27135660acba46903b703e224f14f447e57934/hyperlink-21.0.0-py2.py3-none-any.w
+ (74kB)                                                                                                                                                     
+     |████████████████████████████████| 81kB 650kB/s                                                                                                        
+Collecting zope.interface>=4.4.2 (from twisted)                                                                                                             
+  Downloading https://files.pythonhosted.org/packages/61/4a/66c2a5519e8c1381381fdd6ea944d95deb015ef57303a17fb7b0a5cf8f63/zope.interface-5.4.0-cp27-cp27m-win
+.whl (207kB)                                                                                                                                                
+     |████████████████████████████████| 215kB 377kB/s                                                                                                       
+Collecting incremental>=16.10.1 (from twisted)                                                                                                              
+  Downloading https://files.pythonhosted.org/packages/99/3b/4f80dd10cb716f3a9e22ae88f026d25c47cc3fdf82c2747f3d59c98e4ff1/incremental-21.3.0-py2.py3-none-any
+hl                                                                                                                                                          
+Requirement already satisfied: six in c:\python27\lib\site-packages (from Automat>=0.3.0->twisted) (1.16.0)                                                 
+Collecting idna>=2.5 (from hyperlink>=17.1.1->twisted)                                                                                                      
+  Downloading https://files.pythonhosted.org/packages/a2/38/928ddce2273eaa564f6f50de919327bf3a00f091b5baba8dfa9460f3a8a8/idna-2.10-py2.py3-none-any.whl (58k
+                                                                                                                                                            
+     |████████████████████████████████| 61kB 472kB/s                                                                                                        
+Collecting typing; python_version < "3.5" (from hyperlink>=17.1.1->twisted)                                                                                 
+  Downloading https://files.pythonhosted.org/packages/0b/cb/da856e81731833b94da70a08712f658416266a5fb2a9d9e426c8061becef/typing-3.10.0.0-py2-none-any.whl   
+Requirement already satisfied: setuptools in c:\python27\lib\site-packages (from zope.interface>=4.4.2->twisted) (41.2.0)                                   
+Installing collected packages: attrs, Automat, PyHamcrest, constantly, idna, typing, hyperlink, zope.interface, incremental, twisted                        
+  Running setup.py install for PyHamcrest ... done                                                                                                          
+Successfully installed Automat-20.2.0 PyHamcrest-1.10.1 attrs-21.2.0 constantly-15.1.0 hyperlink-21.0.0 idna-2.10 incremental-21.3.0 twisted-20.3.0 typing-3
+0.0.0 zope.interface-5.4.0                                                                                                                                  
+WARNING: You are using pip version 19.2.3, however version 20.3.4 is available.                                                                             
+You should consider upgrading via the 'python -m pip install --upgrade pip' command.                                                                        
+                                                                                                                                                            
+C:\Python27\Scripts                                                                                                                                         
+λ drozer.bat console connect                                                                                                                                
+C:\Python27\lib\site-packages\OpenSSL\crypto.py:14: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it 
+ now deprecated in cryptography, and will be removed in the next release.                                                                                   
+  from cryptography import utils, x509                                                                                                                      
+:0: UserWarning: You do not have a working installation of the service_identity module: 'No module named service_identity'.  Please install it from <https:/
+ypi.python.org/pypi/service_identity> and make sure all of its dependencies are satisfied.  Without the service_identity module, Twisted can perform only ru
+mentary TLS client hostname verification.  Many valid certificate/hostname mappings may be rejected.                                                        
+Selecting 0800abb227bda35a (Google Android SDK built for x86 10)                                                                                            
+                                                                                                                                                            
+            ..                    ..:.                                                                                                                      
+           ..o..                  .r..                                                                                                                      
+            ..a..  . ....... .  ..nd                                                                                                                        
+              ro..idsnemesisand..pr                                                                                                                         
+              .otectorandroidsneme.                                                                                                                         
+           .,sisandprotectorandroids+.                                                                                                                      
+         ..nemesisandprotectorandroidsn:.                                                                                                                   
+        .emesisandprotectorandroidsnemes..                                                                                                                  
+      ..isandp,..,rotectorandro,..,idsnem.                                                                                                                  
+      .isisandp..rotectorandroid..snemisis.                                                                                                                 
+      ,andprotectorandroidsnemisisandprotec.                                                                                                                
+     .torandroidsnemesisandprotectorandroid.                                                                                                                
+     .snemisisandprotectorandroidsnemesisan:                                                                                                                
+     .dprotectorandroidsnemesisandprotector.                                                                                                                
+                                                                                                                                                            
+drozer Console (v2.4.4)                                                                                                                                     
+dz>                                                                                                                                                         
+                                                                                                                                                            
